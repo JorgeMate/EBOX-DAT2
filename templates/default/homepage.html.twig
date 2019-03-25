@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+
+    <br/>
+    <br/>
+
+    <div class="row align-items-center" style="background-color:#fff">
+        <br>
+    </div>    
+    
+
+    <div class="row align-items-center" style="background-color:#fff">
+    
+        <div class="col-sm-2 text-center">
+            <a href="{{ path('user_cpanel') }}"><img src="{{ asset('assets/images/logoKS80x50.png') }}"></a>
+        </div>   
+
+        <div class="col-sm-7">
+            
+        </div>    
+
+        <div class="col-sm-3 text-center" >
+            <h4 style="color:#242B5E">E.R.P. Producción 1903</h4>
+        </div>    
+        
+    </div>    
+
+    <div class="row align-items-center" style="background-color:#fff">
+        <br>
+    </div>    
+
+    <br/>
+    <br/>
+    <br/>
+    
+    <div class="page-hero d-flex align-items-center justify-content-center">
+        <a href="{{ path('user_cpanel') }}"><img src="{{ asset('assets/images/logo eurobox1.jpg') }}"></a>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="page-hero d-flex align-items-center justify-content-center">
+        <a href="{{ path('user_cpanel') }}">Acceso usuarios autorizados</a>
+    </div>
+    
+    
+    <div class="row align-items-center">
+        <div class="col-sm-2">
+        </div>    
+        <div class="col-sm-8">
+            {{ include('default/_flash_messages.html.twig') }}
+        </div>
+        <div class="col-sm-2">
+        </div>    
+    </div>
+
+{% endblock %}

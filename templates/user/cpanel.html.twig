@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PANEL{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col">
+        <img src="{{ asset('assets/images/logo eurobox.jpg') }}">
+    </div>
+    <div class="col">
+        <div class="text-right">
+            
+            <h5>{{user.email}}</h5>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
