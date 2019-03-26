@@ -10,48 +10,49 @@
 {% block body %}
     
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
     {% endif %}
 
-    <div class="row">
-        <br/>
-        <br/>
-        <br/>
-    </div>
-    
-    <div>
+    <br/>
+    <br/>
+    <br/>
 
+    <div class="row">
+    
+        <div class="col-sm-1">
+        </div>
+    
         
-        <div class="col-sm-6">
+        <div class="col-sm-5">
 
             <div class="well">
 
                 <form action="{{ path('app_login') }}" method="post">
+                    
                     <fieldset>
 
                         <legend><i class="fa fa-lock" aria-hidden="true"></i> Acceso al sistema</legend>
 
-
                         <div class="form-group">
                             <label for="inputEmail" class="sr-only">Email (Usuario)</label>
-                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="email" required autofocus>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="email" required autofocus>
                         </div>
 
                        <div class="form-group">
-                           <label for="inputPassword" class="sr-only">Contraseña</label>
+                            <label for="inputPassword" class="sr-only">Contraseña</label>
                             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="contraseña" required>
                         </div>
                             
-
                         <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
-
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                         {#
-                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                            See https://symfony.com/doc/current/security/remember_me.html
-                        {% block header %}
-                        <img src="{{ asset('assets/images/logo eurobox.jpg') }}"> {% endblock %}
+                            Ulogo euroboxcomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                            Slogo euroboxe https://symfony.com/doc/current/security/remember_me.html
+                        {% bllogo euroboxck header %}
+                        <img logo euroboxrc="{{ asset('assets/images/logo eurobox.jpg') }}"> {% endblock %}
 
                             <div class="checkbox mb-3">
                                 <label>
@@ -60,26 +61,23 @@
                             </div>
 
                             </div>
-             <img src="{{ asset('assets/images/png/ON.png') }}">             #}
+                         <img src="{{ asset('assets/images/png/ON.png') }}">             #}
 
-                        <div class="form-group">
-                            <br/>
-                        </div>    
-
+                 
                         <div class="form-group">
 
                             <div class="row">
 
-                            <div class="col">
+                                <div class="col">
 
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Regístrese
-                                </button>
-                            </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Regístrese
+                                    </button>
+                                </div>
 
-                            <div class="col text-right">
-                                
-                            </div>
+                                <div class="col text-right">
+                                    
+                                </div>
 
                             </div>
 
@@ -91,9 +89,18 @@
 
             </div>
 
-            <div class="col-sm-3">
-                    
-                    
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+    
+        <div class="col-sm-5 text-right"> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-secondary">Inicio de turno o cambio de tarea</h4>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="{{ path('index_tarea') }}"><img src="{{ asset('assets/images/ON0.png') }}"></a>
+                </div>
             </div>
 
         </div>
