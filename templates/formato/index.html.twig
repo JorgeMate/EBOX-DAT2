@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formatos{% endblock %}
+
+{% block body %}
+
+    <table>
+
+        {% for formato in formatos %}
+            <tr>
+                    <td>{% if formato.activo %}<i class="far fa-sun"></i>{% endif %}</td>
+                    <td class="text-center">{{ formato.id }}</td> 
+                    <td> | </td>
+                    <td>{{ formato.name }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

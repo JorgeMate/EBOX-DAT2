@@ -42,7 +42,7 @@
 
                         <thead class="thead-dark">
                             <tr>
-                                <th>Seleccione SUB Tarea</th>
+                                <th class="text-warning">Seleccione SUB Tarea</th>
                             </tr>
                         </thead>
                 
@@ -52,8 +52,8 @@
                             <tr class="table-light">
         
                                 <td>
-                                    <a href="">
-                                        <h6>{{subtarea.tareasub}}</h6>
+                                    <a href="{{ path('confirm_subtarea', {id: subtarea.id}) }}">
+                                        <h6 class="text-warning">{{subtarea.tareasub}}</h6>
                                     </a>
                                 </td>
                         

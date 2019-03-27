@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artículos{% endblock %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <td class="text-center"><i class="far fa-sun"></i> = activo</td>
+            <td class="text-center"> ID. </td>
+            <td>  </td>
+            <td>Artículo</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for trabajo in trabajos %}
+            <tr>
+                <td class="text-center">{% if trabajo.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
+                <td class="text-center"> {{ trabajo.id }} </td>
+                <td>  </td>
+                <td> <a href="{{ path('trabajo_show', {id: trabajo.id}) }}">{{ trabajo.STrabajo }}</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+{% endblock %}

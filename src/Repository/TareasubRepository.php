@@ -20,21 +20,25 @@ class TareasubRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Tareasub[] Returns an array of Tareasub objects
+    //  * @return Tareasub|null Returns a Tareasub object
     //  */
     /*
     */
 
-    public function findByTareaField($value)
+    public function findByTareasubField($value)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.tarea = :val')
+        $QueryBuilder = $this->createQueryBuilder('t')
+            ->innerJoin('t.tarea','tp')
+            ->andWhere('t.id = :val')
             ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            
+            ->select('t.tareasub as subtarea', 'tp.tarea as tarea')
+
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
+
+        return $QueryBuilder;
+
     }
     
 

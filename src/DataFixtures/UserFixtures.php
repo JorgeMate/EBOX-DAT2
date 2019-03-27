@@ -27,7 +27,7 @@ class UserFixtures extends Fixture
 
         $user->setEmail('jorge@kimberly-systems.com') ;
 
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
         $user->setRoles($roles);
 
 

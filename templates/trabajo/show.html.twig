@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A|{{ trabajo.id }}{% endblock %}
+
+{% block body %}
+
+<h4> {{ trabajo.id }} <i class="fas fa-box"></i> {{ trabajo.STrabajo }}</h4>
+
+<br>
+<br>
+
+<div class="row">
+
+    <div class="col-6">
+
+        <table class="table">
+
+            <tr>
+                <td>Unidades.</td>
+                <td>{{ trabajo.IUnidades }}</td>
+            </tr>
+            <tr>
+                <td>Código Artículo</td>
+                <td>{{ trabajo.SCodArt }}</td>
+            </tr>
+            <tr>
+                <td>Orden de compra</td>
+                <td>{{ trabajo.SOrdenDeCompra }}</td>
+            </tr>
+            <tr>
+                <td>Notas</td>
+                <td>{{ trabajo.MtNotas }}</td>
+            </tr>
+                                    
+        </table>
+                
+    </div>    
+
+    <div class="col-6">
+
+        <table class="table">
+
+            <tr>
+                <td>Finalizado</td>
+                <td>{{ trabajo.iFinalizado }}</td>
+            </tr>
+            <tr>
+                <td>Tipo Palet</td>
+                <td>{{ trabajo.STipoPalet }}</td>
+            </tr>
+            <tr>
+                <td>En 2 Palets distintos</td>
+                <td>{{ trabajo.IEn2Pal }}</td>
+            </tr>
+                                        
+        </table>
+
+
+    </div>    
+    
+</div>
+
+
+{% endblock %}

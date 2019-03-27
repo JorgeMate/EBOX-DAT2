@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Semielaborados{% endblock %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <td class="text-center"><i class="far fa-sun"></i> = activo</td>
+            <td class="text-center"> ID. </td>
+            <td>  </td>
+            <td>Semielaborado</td>
+        </tr>
+    </thead>
+        
+    <tbody>
+    {% for semi in semis %}
+        <tr>
+            <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
+            <td class="text-center"> {{ semi.id }} </td>
+            <td>  </td>
+            <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+
+{% endblock %}

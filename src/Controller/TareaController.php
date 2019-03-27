@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\TareaRepository;
+
 use App\Entity\Tarea;
 use App\Entity\Tareasub;
+use App\Entity\Operario;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,21 +39,48 @@ class TareaController extends AbstractController
         $tareas = $tareas->findAll();
         $subtareas = $tarea->getTareasubs();
 
-
-        //   $subtareas = $this->getDoctrine()
-        //   ->getRepository(Tareasub::class)
-        //   ->findByTareaField($tarea->getId());
-
-
-
         return $this->render('tarea/indexsub.html.twig', [
             'tareas' => $tareas,
             'subtareas' => $subtareas,
         ]);
 
-
-
     }
+
+    /**
+     * @Route("subtarea/{id}/confirm", methods={"GET","POST"}, name="confirm_subtarea")
+     */
+    public function confirma(Request $request, Tareasub $tareasub)
+    {
+
+        $operario = null;
+        $iname = $request->request->get('iname');
+
+            if($iname){
+                $operario = $this->getDoctrine()
+                ->getRepository(Operario::class)
+                ->findOneByIname($iname);
+
+            //    var_dump($operario);die;
+
+              }
+        
+
+        $tareaX = $this->getDoctrine()
+            ->getRepository(Tareasub::class)
+            ->findByTareasubField($tareasub);
+
+        //var_dump($tareaX); die;
+
+        return $this->render('tarea/confirm.html.twig', [
+            'iname' => $iname,
+            'operario' => $operario,
+            'tareaX' => $tareaX
+        ]);
+    
+    }
+
+
+
 
 
 

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carpetas{% endblock %}
+
+{% block body %}
+
+    <table>
+
+        {% for carpeta in carpetas %}
+            <tr>
+
+                <td>{% if carpeta.activa %}<i class="far fa-sun"></i>{% endif %}</td>
+                <td class="text-center">{{ carpeta.id }}</td>
+                <td><i class="far fa-folder"></i></td>
+                <td>{{ carpeta.año }} - </td>
+                <td><a href="{{ path('carpeta_show', {id: carpeta.id}) }}">{{ carpeta.name }}</a></td>
+
+
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

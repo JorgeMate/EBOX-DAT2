@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+
+    <table>
+
+        {% for cliente in clientes %}
+            <tr>
+                    <td>{% if cliente.activo %}<i class="far fa-sun"></i>{% endif %}</td>
+                <td class="text-center">{{ cliente.id }}</td>
+                <td>{{ cliente.name }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}
