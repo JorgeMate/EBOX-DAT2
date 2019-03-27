@@ -21,9 +21,13 @@ class CarpetaRepository extends ServiceEntityRepository
 
     public function findAllByOrder($field, $order)
     {
-        return $this->createQueryBuilder('t')
-            ->join('f',)
-            ->orderBy('t.'.$field, $order)
+        return $this->createQueryBuilder('c')
+            ->leftjoin('c.formato','f')
+            ->leftjoin('c.cliente','i')
+
+            ->orderBy('c.'.$field, $order)
+            ->select('c.id', 'c.name', 'c.activa', 'c.ano',
+            'f.name as formato', 'i.name as cliente')
             ->getQuery()
             ->getResult()
         ;

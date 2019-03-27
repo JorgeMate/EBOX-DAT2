@@ -11,6 +11,7 @@
             <td class="text-center"> ID. </td>
             <td>  </td>
             <td>Artículo</td>
+            <td>F. Alta</td>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
                 <td class="text-center"> {{ trabajo.id }} </td>
                 <td>  </td>
                 <td> <a href="{{ path('trabajo_show', {id: trabajo.id}) }}">{{ trabajo.STrabajo }}</a></td>
+                <td>  {{ trabajo.TChanged|date('d-m-y') }} </td>
             </tr>
         {% endfor %}
     </tbody>

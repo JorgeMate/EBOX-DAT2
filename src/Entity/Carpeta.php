@@ -23,7 +23,7 @@ class Carpeta
      */
     private $name;
 
-    // , unique=true ojo, año + name
+    // , unique=true ojo, ano + name
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Cliente", inversedBy="carpetas")
@@ -43,7 +43,7 @@ class Carpeta
     /**
      * @ORM\Column(type="smallint")
      */
-    private $año;
+    private $ano;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Trabajo", inversedBy="carpetas")
@@ -111,14 +111,14 @@ class Carpeta
         return $this;
     }
 
-    public function getAño(): ?int
+    public function getano(): ?int
     {
-        return $this->año;
+        return $this->ano;
     }
 
-    public function setAño(int $año): self
+    public function setano(int $ano): self
     {
-        $this->año = $año;
+        $this->ano = $ano;
 
         return $this;
     }

@@ -26,6 +26,18 @@ use App\Entity\Semi;
  */
 class AdminController extends AbstractController
 {
+
+    /**
+     * @Route("/recupera", name="recupera")
+     */
+    public function recupera()
+    {
+        return $this->render('recupera/recupera.html.twig', [
+            
+        ]);
+
+    }
+
     /**
      * @Route("/", name="admin")
      */
@@ -38,6 +50,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/semi/{id}", name="semi_show")
      */
@@ -47,7 +60,6 @@ class AdminController extends AbstractController
             'semi' => $semi,
         ]);
     }
-
 
     /**
      * @Route("/semielaborados", name="semis")
@@ -63,6 +75,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/articulo/{id}", name="trabajo_show")
      */
@@ -74,7 +87,6 @@ class AdminController extends AbstractController
         ]);
         
     }
-
 
     /**
      * @Route("/articulos", name="trabajos")
@@ -89,6 +101,7 @@ class AdminController extends AbstractController
         
 
     }
+
 
     /**
      * @Route("/carpeta/{id}", name="carpeta_show")
@@ -112,7 +125,6 @@ class AdminController extends AbstractController
         ]);
 
     }
-
 
     /**
      * @Route("/carpetas", name="carpetas")

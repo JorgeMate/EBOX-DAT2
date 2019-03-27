@@ -6,18 +6,38 @@
 
     <table>
 
-        {% for carpeta in carpetas %}
+        <thead>
             <tr>
+                <td class="text-center"><i class="far fa-sun"></i>activa</td>
+                <td class="text-center"> ID. </td>
+                <td>&nbsp;</td>
+                <td>Año</td>
+                <td>Nombre</td>
+                <td>Formato</td>
+                <td>Cliente</td>
 
-                <td>{% if carpeta.activa %}<i class="far fa-sun"></i>{% endif %}</td>
+            </tr>
+        </thead>
+    
+
+
+        <tbody>
+        {% for carpeta in carpetas %}
+
+            <tr>
+                <td class="text-center">{% if carpeta.activa %}<i class="far fa-sun"></i>{% endif %}</td>
                 <td class="text-center">{{ carpeta.id }}</td>
-                <td><i class="far fa-folder"></i></td>
-                <td>{{ carpeta.año }} - </td>
+                <td> &nbsp; <i class="far fa-folder"></i></td>
+                <td>{{ carpeta.ano }} - </td>
                 <td><a href="{{ path('carpeta_show', {id: carpeta.id}) }}">{{ carpeta.name }}</a></td>
+                <td>{{ carpeta.formato }}</td>
+                <td>{{ carpeta.cliente }}</td>
 
 
             </tr>
+
         {% endfor %}
+        </tbody>
 
     </table>
 
