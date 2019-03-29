@@ -1,0 +1,16 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "EBOX-DAT2",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
