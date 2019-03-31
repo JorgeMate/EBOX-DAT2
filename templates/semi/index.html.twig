@@ -4,30 +4,49 @@
 
 {% block body %}
 
-<table class="table table-hoover table-borderless table-sm table-responsive-sm" >
-    <thead>
-        <tr>
-            <td class="text-center"></td>
-            <td class="text-center"> ID. </td>
-            
-            <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
-            <td class="text-center">F. Alta</td>
-        </tr>
-    </thead>
-        
-    <tbody>
-    {% for semi in semis %}
-        <tr>
-            <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
-            <td class="text-center"> {{ semi.id }} </td>
-            
-            <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
-            <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
+<div class="container">
 
-</table>
+    <div class="row justify-content-between">
+        <div class="col"><h4 class="text-danger"><i class="fas fa-box-open"> </i>SEMIELABORADOS</h4></div>
+        <div class="col text-right">
+            <a href="{{ path('new_semi') }}" class="btn btn-light btn-lg">
+                <i class="fa fa-edit" aria-hidden="true"></i> NUEVO
+            </a>
+        </div>
+    </div>
+    
+    <br>
+    
+    <div class="row">
+
+        <table class="table table-hoover table-borderless table-sm table-responsive-sm" >
+            <thead>
+                <tr>
+                    <td class="text-center"></td>
+                    <td class="text-center"> ID. </td>
+                    
+                    <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
+                    <td class="text-center">F. Alta</td>
+                </tr>
+            </thead>
+                
+            <tbody>
+            {% for semi in semis %}
+                <tr>
+                    <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
+                    <td class="text-center"> {{ semi.id }} </td>
+                    
+                    <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
+                    <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 
 {% endblock %}

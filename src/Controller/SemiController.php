@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use App\Repository\SemiRepository;
 use App\Entity\Semi;
 
 
@@ -21,11 +22,36 @@ use App\Entity\Semi;
  */
 class SemiController extends AbstractController
 {
+
+    /**
+     * @Route("/semi/{id}", name="semi_show")
+     */
+    public function semi_show(Semi $semi)
+    {
+        return $this->render('semi/show.html.twig', [
+            'semi' => $semi,
+        ]);
+    }
+
+    /**
+     * @Route("/semielaborados", name="semis")
+     */
+    public function semis(SemiRepository $semis)
+    {
+        $semis = $semis->findAllByOrder('id', 'DESC');
+
+     //   var_dump($semis);die;
+
+        return $this->render('semi/index.html.twig', [
+            'semis' => $semis,
+        ]);
+    }
+
    
     /**
      * @Route("/recupera_semi", name="recupera_semi")
      */
-    public function recupera(Request $request)
+    public function recupera(Request $request, AdminController $adminController)
     {
 
         $id = $request->request->get('id');
@@ -44,7 +70,11 @@ class SemiController extends AbstractController
         
             } else {
 
-                // Dar de alta
+
+                return $this->render('semi/new.html.twig', [
+                    'semi' => $semi,
+
+                ]);
 
             }
                         

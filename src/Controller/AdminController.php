@@ -5,17 +5,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use App\Repository\ClienteRepository;
-use App\Repository\FormatoRepository;
-use App\Repository\CarpetaRepository;
-use App\Repository\TrabajoRepository;
-use App\Repository\SemiRepository;
 
-use App\Entity\Carpeta;
-use App\Entity\Trabajo;
 use App\Entity\Semi;
+
+use App\Form\SemiType;
+
 
 /**
  * Controller used to manage current center.
@@ -40,107 +40,35 @@ class AdminController extends AbstractController
         ]);
     }
 
-
     /**
-     * @Route("/semi/{id}", name="semi_show")
+     * @Route("/semielaborado/nuevo", methods={"GET", "POST"}, name="new_semi")
      */
-    public function semi_show(Semi $semi)
+    public function newSemi(Request $request): Response
     {
-        return $this->render('semi/show.html.twig', [
-            'semi' => $semi,
-        ]);
-    }
+        $semi = new Semi();
 
-    /**
-     * @Route("/semielaborados", name="semis")
-     */
-    public function semis(SemiRepository $semis)
-    {
-        $semis = $semis->findAllByOrder('id', 'DESC');
+        $form = $this->createForm(SemiType::class, $semi);
+        $form->handleRequest($request);
 
-     //   var_dump($semis);die;
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        return $this->render('semi/index.html.twig', [
-            'semis' => $semis,
-        ]);
-    }
+            $this->getDoctrine()->getManager()->persist($semi);
+            $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Semielaborado insertado correctamente');
 
-    /**
-     * @Route("/articulo/{id}", name="trabajo_show")
-     */
-    public function trabajo_show(Trabajo $trabajo)
-    {
-        return $this->render('trabajo/show.html.twig', [
-            'trabajo' => $trabajo,
-            
-        ]);
-        
-    }
+            return $this->redirectToRoute('semis');
 
-    /**
-     * @Route("/articulos", name="trabajos")
-     */
-    public function trabajos(TrabajoRepository $trabajos)
-    {
-        $trabajos = $trabajos->findAllByOrder('id', 'DESC');
-
-        return $this->render('trabajo/index.html.twig', [
-            'trabajos' => $trabajos,
-        ]);
-        
-
-    }
-
-
-    /**
-     * @Route("/carpeta/{id}", name="carpeta_show")
-     */
-    public function carpeta_show(Carpeta $carpeta)
-    {
-
-        $trabajos = $carpeta->getTrabajos();
-        $semis = [];
-        
-        foreach ($trabajos as $trabajo){
-            $semis = $trabajo->getSemis();
         }
 
-        //var_dump($semis);die;
-
-        return $this->render('carpeta/show.html.twig', [
-            'carpeta' => $carpeta,
-            'trabajos' => $trabajos,
-            'semis' => $semis,
+        return $this->render('semi/new.html.twig', [
+            'semi' => $semi,
+            'form' => $form->createView(),
         ]);
 
     }
 
-    /**
-     * @Route("/carpetas", name="carpetas")
-     */
-    public function carpetas(CarpetaRepository $carpetas)
-    {
-        
-        $carpetas = $carpetas->findAllByOrder('id', 'DESC');
 
-        return $this->render('carpeta/index.html.twig', [
-            'carpetas' => $carpetas,
-        ]);
-    }
-
-
-    /**
-     * @Route("/formatos", name="formatos")
-     */
-    public function formatos(FormatoRepository $formatos)
-    {
-        $formatos = $formatos->findAll();
-
-        return $this->render('formato/index.html.twig', [
-            'formatos' => $formatos,
-        ]);
-    }
 
     /**
      * @Route("/clientes", name="clientes")

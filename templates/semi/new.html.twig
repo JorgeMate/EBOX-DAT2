@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Semielaborados{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h4 class="text-success">Nuevo Semielaborado</h4>
+    <br>
+
+
+    <div class="row">
+
+        <div class="col-2"></div>
+
+    
+        <div class="col-8">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+        
+            <br>
+
+            <div class="text-right">
+
+                    <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                        </button>
+            
+
+            </div>
+            
+            {{ form_end(form) }}    
+        
+        </div>
+
+        <div class="col-2"></div>
+
+    </div>
+
+    <br>    
+
+
+{% endblock %}
