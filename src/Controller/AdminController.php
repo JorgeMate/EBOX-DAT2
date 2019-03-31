@@ -27,16 +27,6 @@ use App\Entity\Semi;
 class AdminController extends AbstractController
 {
 
-    /**
-     * @Route("/recupera", name="recupera")
-     */
-    public function recupera()
-    {
-        return $this->render('recupera/recupera.html.twig', [
-            
-        ]);
-
-    }
 
     /**
      * @Route("/", name="admin")

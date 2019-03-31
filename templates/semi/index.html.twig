@@ -4,14 +4,14 @@
 
 {% block body %}
 
-<table>
+<table class="table table-hoover table-borderless table-sm table-responsive-sm" >
     <thead>
         <tr>
-            <td class="text-center"><i class="far fa-sun"></i> = activo</td>
+            <td class="text-center"></td>
             <td class="text-center"> ID. </td>
-            <td>  </td>
-            <td>Semielaborado</td>
-            <td>F. Alta</td>
+            
+            <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
+            <td class="text-center">F. Alta</td>
         </tr>
     </thead>
         
@@ -20,9 +20,9 @@
         <tr>
             <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
             <td class="text-center"> {{ semi.id }} </td>
-            <td>  </td>
+            
             <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
-            <td>  {{ semi.TChanged|date('d-m-y') }} </td>
+            <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>
         </tr>
     {% endfor %}
     </tbody>
