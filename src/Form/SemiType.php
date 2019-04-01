@@ -16,6 +16,15 @@ class SemiType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $builder
+        ->add('id_anterior', TextType::class, [
+            'label' => 'ID ANTERIOR',
+            'required' => true,
+            
+        ]);
+
+
         $builder
             ->add('s_semi', TextType::class, [
                 'label' => 'Semielaborado',

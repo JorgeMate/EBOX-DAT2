@@ -40,33 +40,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/semielaborado/nuevo", methods={"GET", "POST"}, name="new_semi")
-     */
-    public function newSemi(Request $request): Response
-    {
-        $semi = new Semi();
-
-        $form = $this->createForm(SemiType::class, $semi);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->getDoctrine()->getManager()->persist($semi);
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', 'Semielaborado insertado correctamente');
-
-            return $this->redirectToRoute('semis');
-
-        }
-
-        return $this->render('semi/new.html.twig', [
-            'semi' => $semi,
-            'form' => $form->createView(),
-        ]);
-
-    }
 
 
 

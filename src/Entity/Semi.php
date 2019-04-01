@@ -18,6 +18,7 @@ class Semi
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="string", length=127)
      */
@@ -123,16 +124,29 @@ class Semi
      */
     private $trabajos;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true, unique=true)
+     */
+    private $id_anterior;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CodigoS", mappedBy="semi")
+     */
+    private $codigoS;
+
 
     public function __construct()
     {
         $this->trabajos = new ArrayCollection();
+        $this->codigoS = new ArrayCollection();
     }
     
     public function getId(): ?int
     {
         return $this->id;
     }
+
+ 
 
     public function getSSemi(): ?string
     {
@@ -397,6 +411,49 @@ class Semi
         if ($this->trabajos->contains($trabajo)) {
             $this->trabajos->removeElement($trabajo);
             $trabajo->removeSemi($this);
+        }
+
+        return $this;
+    }
+
+    public function getIdAnterior(): ?int
+    {
+        return $this->id_anterior;
+    }
+
+    public function setIdAnterior(?int $id_anterior): self
+    {
+        $this->id_anterior = $id_anterior;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CodigoS[]
+     */
+    public function getCodigoS(): Collection
+    {
+        return $this->codigoS;
+    }
+
+    public function addCodigo(CodigoS $codigo): self
+    {
+        if (!$this->codigoS->contains($codigo)) {
+            $this->codigoS[] = $codigo;
+            $codigo->setSemi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCodigo(CodigoS $codigo): self
+    {
+        if ($this->codigoS->contains($codigo)) {
+            $this->codigoS->removeElement($codigo);
+            // set the owning side to null (unless already changed)
+            if ($codigo->getSemi() === $this) {
+                $codigo->setSemi(null);
+            }
         }
 
         return $this;

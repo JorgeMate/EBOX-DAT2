@@ -2,7 +2,7 @@
 
 {% block title %}Semielaborados{% endblock %}
 
-{% block body %}
+{% block main %}
 
 <div class="container">
 
@@ -10,7 +10,7 @@
         <div class="col"><h4 class="text-danger"><i class="fas fa-box-open"> </i>SEMIELABORADOS</h4></div>
         <div class="col text-right">
             <a href="{{ path('new_semi') }}" class="btn btn-light btn-lg">
-                <i class="fa fa-edit" aria-hidden="true"></i> NUEVO
+                <i class="fa fa-edit" aria-hidden="true"></i> Insertar código ANTERIOR
             </a>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <tr>
                     <td class="text-center"></td>
                     <td class="text-center"> ID. </td>
-                    
+                    <td class="text-center">Anterior</td>
                     <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
                     <td class="text-center">F. Alta</td>
                 </tr>
@@ -34,7 +34,8 @@
             {% for semi in semis %}
                 <tr>
                     <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
-                    <td class="text-center"> {{ semi.id }} </td>
+                    <td class="text-center"> {% if not semi.IdAnterior %} {{ semi.id }} {% endif %}</td>
+                    <td class="text-center text-warning"> {{ semi.idAnterior }} </td>
                     
                     <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
                     <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>

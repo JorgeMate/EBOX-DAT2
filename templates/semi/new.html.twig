@@ -2,11 +2,11 @@
 
 {% block title %}Semielaborados{% endblock %}
 
-{% block body %}
+{% block main %}
 
 <div class="container">
 
-    <h4 class="text-success">Nuevo Semielaborado</h4>
+    <h4 class="text-warning">Recuperación de Semielaborado ANTERIOR</h4>
     <br>
 
 
@@ -20,14 +20,13 @@
             {{ form_start(form) }}
             {{ form_widget(form) }}
 
-        
             <br>
 
             <div class="text-right">
 
-                    <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                        </button>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                </button>
             
 
             </div>
