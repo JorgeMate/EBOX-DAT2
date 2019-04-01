@@ -23,13 +23,11 @@ class UserFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        $user = new User();
-
-        $user->setEmail('jorge@kimberly-systems.com') ;
-
         $roles[] = 'ROLE_ADMIN';
-        $user->setRoles($roles);
 
+        $user = new User();
+        $user->setEmail('jorge@kimberly-systems.com') ;
+        $user->setRoles($roles);
 
         $user->setPassword($this->passwordEncoder->encodePassword(
                          $user,
@@ -37,6 +35,20 @@ class UserFixtures extends Fixture
                      ));
             
         $manager->persist($user);
+        
+
+        $user = new User();
+        $user->setEmail('gestion@euroboxenvases.com') ;
+        $user->setRoles($roles);
+
+        $user->setPassword($this->passwordEncoder->encodePassword(
+                         $user,
+                         'carbo'
+                     ));
+            
+        $manager->persist($user);
+
+
 
         $manager->flush();
     }

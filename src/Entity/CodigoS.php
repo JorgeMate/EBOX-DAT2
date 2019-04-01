@@ -32,7 +32,7 @@ class CodigoS
     private $s_codigo;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      */
     private $s_externo;
 

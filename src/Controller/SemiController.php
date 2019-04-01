@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Repository\SemiRepository;
 use App\Entity\Semi;
 
+use App\Entity\CodigoS;
+
 use App\Form\SemiType;
 
 
@@ -106,10 +108,7 @@ class SemiController extends AbstractController
 
         $id = $request->request->get('id');
         
-        $i_uds_palet = $request->request->get('i_uds_palet');
-        
-
-
+    
         if($id){
 
             $semi = $this->getDoctrine()
@@ -117,17 +116,39 @@ class SemiController extends AbstractController
             ->findOneBy(['id' => $id]);
 
             if(!$semi){
-
                 $semi = $this->getDoctrine()
                 ->getRepository(Semi::class)
                 ->findOneBy(['id_anterior' => $id]);
-
             }
 
             if($semi){
 
+                $iunidades = $request->request->get('iunidades');
+                $idpalet = $request->request->get('idpalet');
+
+                if($idpalet){
+
+                    // Insertamos un Palet
+                    $CodigoS = new CodigoS();
+
+                    $CodigoS->setSemi($semi);
+                    $CodigoS->setSCodigo($idpalet);
+                    $CodigoS->setIUnidades($iunidades);
+
+                    $this->getDoctrine()->getManager()->persist($CodigoS);
+                    $this->getDoctrine()->getManager()->flush();
+    
+                }
+
+                $palets = $this->getDoctrine()
+                ->getRepository(CodigoS::class)
+                ->findBy(['semi' => $id]);
+
                 return $this->render('recupera/recupera_palets.html.twig', [
+                    'idpalet' => $idpalet,
+                    'i_uds_palet' =>$iunidades,
                     'semi' => $semi,
+                    'palets' => $palets,
                 ]);
         
             } else {

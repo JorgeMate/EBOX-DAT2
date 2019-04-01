@@ -29,8 +29,6 @@
     </div>
 
     <br>
-
-
     <br>
 
     <div class="row">
@@ -39,7 +37,7 @@
 
             <div class="form-group">
                 <h5>Unidades &nbsp;&nbsp;</h5> 
-                <input type="text" size="5" name="i_uds_palet" id="i_uds_palet" class="form-control-lg" value="{{ semi.IUdsPalet }}">
+                <input type="text" size="5" name="iunidades" id="iunidades" class="form-control-lg" value="{{ i_uds_palet }}">
                 &nbsp;&nbsp;&nbsp;&nbsp;
             </div>
     
@@ -54,6 +52,36 @@
         </form>        
 
     </div>
+
+    <br><br>
+    
+    <div class="row">
+
+        <table class="table table-sm table-hoover table-borderless table-responsive-sm">
+
+            <thead>
+                <tr>
+                    <td>Unidades</td>
+                    <td>Palet N.</td>
+                    <td></td>
+                </tr>    
+            </thead>
+
+            <tbody>
+                {% for palet in palets %}
+                    <tr>
+                        <td>{{palet.iUnidades}}</td>
+                        <td>{{palet.sCodigo}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+
 
 </div>
 
