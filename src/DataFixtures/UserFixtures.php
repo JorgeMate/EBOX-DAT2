@@ -27,6 +27,11 @@ class UserFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('jorge@kimberly-systems.com') ;
+        $user->setNombre('Jorge');
+        $user->setApellidos('Maté Martínez');
+        $user->settelefono('0034 636 831 823');
+        $user->setEnabled(true);
+
         $user->setRoles($roles);
 
         $user->setPassword($this->passwordEncoder->encodePassword(
@@ -39,6 +44,11 @@ class UserFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('gestion@euroboxenvases.com') ;
+        $user->setNombre('Ángel');
+        $user->setApellidos('');
+        $user->settelefono('');
+        $user->setEnabled(true);
+
         $user->setRoles($roles);
 
         $user->setPassword($this->passwordEncoder->encodePassword(

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'user_edit' %}
+
+{% block main %}
+
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %} 
+
+    {#} Breadcrumb #}
+
+{% endif %}
+
+    
+    <div class="row justify-content-between">
+
+        <div class="col">
+            <h3>Datos del usuario</h3>
+        </div>        
+        <div class="col text-right">
+           <h5>Fecha de Alta: {{user.createdAt|date("d/m/Y") }} </h5>
+            {% if 'ROLE_ADMIN' in user.roles %}
+                {{ 'Administrador' }} <i class="fas fa-key text-info"></i> 
+            {% endif %}        
+        </div>     
+    </div>    
+
+        <br>  
+
+    {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8">
+
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                    </button>
+                </div>
+            </div>
+
+
+    {{ form_end(form) }}
+
+    </br>
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+    <div class="container">
+
+        <div class="row">
+
+            {# Cambiamos la contraseña propia o la de otro usuario !? #} 
+
+            <a href="
+            {% if app.user.id != user.id %}
+                {{ path('user_id_change_password', {id:user.id}) }}    
+            {% else %}
+                {{ path('user_change_password') }}
+            {% endif %}
+            " class="btn btn-lg btn-block btn-danger">
+                <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.change_password'|trans }}
+            </a>
+
+        </div>
+
+        <div class="row">
+            &nbsp;
+        </div>
+        
+        {% if app.user.id != user.id %}
+        <div class="row">
+
+            {# Cambiamos la contraseña propia o la de otro usuario !? #} 
+
+            <a href="{{ path('email_user', {id:user.id}) }}" class="btn btn-lg btn-block btn-warning js-send-email_user">
+                <i class="far fa-envelope-open"></i> {{ 'action.user_email'|trans }}
+            </a>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+    {{ parent() }}
+
+    
+{% endblock %}

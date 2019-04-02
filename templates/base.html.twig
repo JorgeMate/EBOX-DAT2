@@ -65,6 +65,23 @@
                                         &nbsp;        
                                     </li>
 
+        
+                                    {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+
+                                         <a class="nav-link" href="{{ path('admin') }}">
+                                            <i class="fa fa-lock" aria-hidden="true"></i> Administración
+                                        </a>
+
+                                    {% endif %}    
+                                    
+                                {% endif %}
+
+                            </ul>    
+
+                            <ul class="nav navbar-nav navbar-right">
+
+                                {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+
                                     <li class="nav-item dropdown">
 
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
@@ -85,14 +102,14 @@
             
                                             {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
                                                 <li>
-                                                    <a class="nav-link" href="{{ path('admin') }}">
-                                                        <i class="fa fa-lock" aria-hidden="true"></i> Administrador
+                                                    <a class="nav-link" href="{{ path('admin_cpanel') }}">
+                                                        <i class="fa fa-lock" aria-hidden="true"></i> Admin.
                                                     </a>
                                                 </li>
                                             {% endif %} 
                                             
                                             <li>
-                                                <a class="nav-link" href="">
+                                                <a class="nav-link" href="{{ path('user_edit') }}">
                                                     <i class="fa fa-edit" aria-hidden="true"></i> Usuario
                                                 </a>
                                             </li>
@@ -104,16 +121,14 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                 {% endif %}
 
-                            </ul>    
 
-                            <ul class="nav navbar-nav navbar-right">
                             {% if app.user %}           
 
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
                                 </li>                                         
 
                                 <form class="form-inline my-2 my-lg-0">
