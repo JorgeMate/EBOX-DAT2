@@ -278,12 +278,17 @@ class Trabajo
      */
     private $codigoP;
 
+    /**
+     * @ORM\Column(type="integer", unique=true, nullable=true)
+     */
+    private $id_anterior;
+
 
     public function __construct()
     {
         $this->carpetas = new ArrayCollection();
         $this->semis = new ArrayCollection();
-        $this->codigoPs = new ArrayCollection();
+        $this->codigoP = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -960,6 +965,18 @@ class Trabajo
                 $codigoP->setTrabajo(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdAnterior(): ?int
+    {
+        return $this->id_anterior;
+    }
+
+    public function setIdAnterior(?int $id_anterior): self
+    {
+        $this->id_anterior = $id_anterior;
 
         return $this;
     }

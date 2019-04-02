@@ -4,50 +4,54 @@
 
 {% block main %}
 
-<div class="container">
+    <div class="container">
 
-    <div class="row justify-content-between">
-        <div class="col"><h4 class="text-danger"><i class="fas fa-box-open"> </i>SEMIELABORADOS</h4></div>
-        <div class="col text-right">
-            <a href="{{ path('new_semi') }}" class="btn btn-light btn-lg">
-                <i class="fa fa-edit" aria-hidden="true"></i> Insertar código ANTERIOR
-            </a>
+        <div class="row justify-content-between">
+            <div class="col">
+                <h4 class="text-danger"><i class="fas fa-box-open"> </i>SEMIELABORADOS</h4>
+            </div>
+            <div class="col text-right">
+                <a href="{{ path('new_semi') }}" class="btn btn-light btn-lg">
+                    <i class="fa fa-edit" aria-hidden="true"></i> Insertar código ANTERIOR
+                </a>  
+            </div>
         </div>
-    </div>
-    
-    <br>
-    
-    <div class="row">
+        
+        
+        <br>
+        <hr>
+        
+        <div class="row">
 
-        <table class="table table-hoover table-borderless table-sm table-responsive-sm">
-            <thead>
-                <tr>
-                    <td class="text-center"></td>
-                    <td class="text-center"> ID. </td>
-                    <td class="text-center">Anterior</td>
-                    <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
-                    <td class="text-center">F. Alta</td>
-                </tr>
-            </thead>
-                
-            <tbody>
-            {% for semi in semis %}
-                <tr>
-                    <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
-                    <td class="text-center"> {% if not semi.IdAnterior %} {{ semi.id }} {% endif %}</td>
-                    <td class="text-center text-warning"> {{ semi.idAnterior }} </td>
+            <table class="table table-hoover table-borderless table-sm table-responsive-sm">
+
+                <thead>
+                    <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center"> ID. </td>
+                        <td class="text-center">Anterior</td>
+                        <td>Semielaborado (<i class="far fa-sun"></i> = activo)</td>
+                        <td class="text-center">F. Alta</td>
+                    </tr>
+                </thead>
                     
-                    <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
-                    <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
+                <tbody>
+                {% for semi in semis %}
+                    <tr>
+                        <td class="text-center">{% if semi.IActivo %}<i class="far fa-sun"></i>{% endif %}</td>
+                        <td class="text-center"> {% if not semi.IdAnterior %} {{ semi.id }} {% endif %}</td>
+                        <td class="text-center text-warning"> {{ semi.idAnterior }} </td>
+                        
+                        <td> <a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>
+                        <td class="text-center">  {{ semi.TChanged|date('d/m/y') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
 
     </div>
-
-</div>
-
 
 {% endblock %}

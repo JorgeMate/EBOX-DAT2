@@ -108,7 +108,6 @@ class SemiController extends AbstractController
 
         $id = $request->request->get('id');
         
-    
         if($id){
 
             $semi = $this->getDoctrine()
@@ -144,7 +143,7 @@ class SemiController extends AbstractController
                 ->getRepository(CodigoS::class)
                 ->findBy(['semi' => $id]);
 
-                return $this->render('recupera/recupera_palets.html.twig', [
+                return $this->render('recupera/semi/recupera_palets.html.twig', [
                     'idpalet' => $idpalet,
                     'i_uds_palet' =>$iunidades,
                     'semi' => $semi,
@@ -159,8 +158,7 @@ class SemiController extends AbstractController
      
         }   
 
-        return $this->render('recupera/recupera.html.twig', [        
-        ]);
+        return $this->render('recupera/semi/recupera.html.twig', []);
 
 
     }
