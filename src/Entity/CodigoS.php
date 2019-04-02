@@ -83,12 +83,7 @@ class CodigoS
     private $s_notas;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $idpedido;
-
-    /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="string", length=127, nullable=true)
      */
     private $s_semi;
 
@@ -106,6 +101,11 @@ class CodigoS
      * @ORM\Column(type="integer", nullable=true)
      */
     private $i_changed;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pedido", inversedBy="codigoS")
+     */
+    private $pedido;
 
     public function getId(): ?int
     {
@@ -268,17 +268,6 @@ class CodigoS
         return $this;
     }
 
-    public function getIdpedido(): ?int
-    {
-        return $this->idpedido;
-    }
-
-    public function setIdpedido(?int $idpedido): self
-    {
-        $this->idpedido = $idpedido;
-
-        return $this;
-    }
 
     public function getSSemi(): ?string
     {
@@ -324,6 +313,18 @@ class CodigoS
     public function setIChanged(?int $i_changed): self
     {
         $this->i_changed = $i_changed;
+
+        return $this;
+    }
+
+    public function getPedido(): ?Pedido
+    {
+        return $this->pedido;
+    }
+
+    public function setPedido(?Pedido $pedido): self
+    {
+        $this->pedido = $pedido;
 
         return $this;
     }

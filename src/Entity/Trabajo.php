@@ -273,11 +273,17 @@ class Trabajo
      */
     private $semis;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CodigoP", mappedBy="trabajo")
+     */
+    private $codigoP;
+
 
     public function __construct()
     {
         $this->carpetas = new ArrayCollection();
         $this->semis = new ArrayCollection();
+        $this->codigoPs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -922,6 +928,37 @@ class Trabajo
     {
         if ($this->semis->contains($semi)) {
             $this->semis->removeElement($semi);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CodigoP[]
+     */
+    public function getCodigoP(): Collection
+    {
+        return $this->codigoP;
+    }
+
+    public function addCodigoP(CodigoP $codigoP): self
+    {
+        if (!$this->codigoP->contains($codigoP)) {
+            $this->codigoP[] = $codigoP;
+            $codigoP->setTrabajo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCodigoP(CodigoP $codigoP): self
+    {
+        if ($this->codigoP->contains($codigoP)) {
+            $this->codigoP->removeElement($codigoP);
+            // set the owning side to null (unless already changed)
+            if ($codigoP->getTrabajo() === $this) {
+                $codigoP->setTrabajo(null);
+            }
         }
 
         return $this;
