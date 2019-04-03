@@ -1,14 +1,16 @@
-var Session = {
+/*
+
+var CodigoP = {
 
     initialize: function($wrapper) {
         this.$wrapper = $wrapper;
         this.$wrapper.find('.js-delete-codigoP').on(
             'click',
-            this.handleSessionDelete
+            this.handleCodigoPDelete
         );
     },
 
-    handleSessionDelete: function(e) {
+    handleCodigoPDelete: function(e) {
         e.preventDefault();
 
         $(this).addClass('text-danger');
@@ -32,17 +34,16 @@ var Session = {
 
 };
 
+*/
 
 $(document).ready(function() {
 
-    var $table = $('.js-sessions-table');
-    Session.initialize($table);
+    var $table = $('.js-palets-table');
+    // CodigoP.initialize($table);
 
-    /*
+    // var $table = $('.js-sessions-table');
 
-    var $table = $('.js-sessions-table');
-
-    $table.find('.js-delete-session').on('click', function(e) {
+    $table.find('.js-palet-delete').on('click', function(e) {
         e.preventDefault();
 
         $(this).addClass('text-danger');

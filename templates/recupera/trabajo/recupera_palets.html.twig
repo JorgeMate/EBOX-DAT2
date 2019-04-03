@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recuperación{% endblock %}
+{% block title %}Palets{% endblock %}
 
 {% block main %}
 
@@ -26,12 +26,9 @@
 
     </div>
 
-    <br>
-    <br>
+    <br><br>
 
-
-
-    <form class="form" action="" method="post">
+    <form class="form" action="{{ path('recupera_trabajo') }}" method="post">
 
       <div class="form-row text-bottom">
 
@@ -43,7 +40,7 @@
     
             <div class="form-group col-sm-3">
                 <h5>Lote</h5> 
-                <input type="text" size="8" name="ilote" id="ilote" class="form-control-lg" value="{{ i_lote }}">
+                <input type="text" size="8" pattern="^[0-9]*$"  name="ilote" id="ilote" class="form-control-lg" value="{{ i_lote }}">
                 
             </div>
     
@@ -63,40 +60,37 @@
 
     </form>
     
-    
-
     <br><br>
     
+        <table class="table js-palets-table table-sm table-striped table-hoover table-responsive-sm">
+
+            <thead>
+                <tr class="text-center">
+                    <td>Unidades</td>
+                    <td>Lote</td>
+                    <td>Palet N.</td>
+                    <td class="text-danger">BORRAR</td>
+                </tr>    
+            </thead>
     
-    <table class="table table-sm table table-striped table-hoover table-responsive-sm">
-
-        <thead>
-            <tr>
-                <td class="text-center">Unidades</td>
-                <td class="text-center">Lote</td>
-                <td class="text-center">Palet N.</td>
-                <td class="text-danger text-center">BORRAR</td>
-            </tr>    
-        </thead>
-
-        <tbody>
-            {% for palet in palets %}
-                <tr>
-                    <td class="text-center text-success">{{palet.iUnidades}}</td>
-                    <td class="text-center text-success">{{palet.iLote}}</td>
-                    <td class="text-center text-success">{{palet.sCodigo}}</td>
-                    <td class="text-center">
-                        <a href="" 
-                            class="js-delete-codigoP" data-url="{{ path('codigoP_delete', {id: palet.id}) }}"
-                        >
-                            <span class="fas fa-skull-crossbones"></span>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-
-    </table>
+            <tbody>
+                {% for palet in palets %}
+                    <tr class="text-center text-success">
+                        <td>{{palet.iUnidades}}</td>
+                        <td>{{palet.iLote}}</td>
+                        <td>{{palet.sCodigo}}</td>
+                        <td>
+                            <a href="#" 
+                                class="js-palet-delete" data-url="{{ path('codigoP_delete', {id: palet.id}) }}"
+                            >
+                                <span class="fas fa-skull-crossbones text-danger"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    
+        </table>
 
 </div>
 
@@ -105,5 +99,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('assets/js/codigoP_delete.js') }}"></script>
+    <script src="{{ asset('assets/js/js-palet-delete.js') }}"></script>
 {% endblock %}

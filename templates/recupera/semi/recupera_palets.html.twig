@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recuperación{% endblock %}
+{% block title %}Semielaborados{% endblock %}
 
 {% block main %}
 
@@ -57,7 +57,7 @@
     
     <div class="row">
 
-            <table class="table table-sm table table-striped table-hoover table-responsive-sm">
+            <table class="table js-palets-table table table-sm table-striped table-hoover table-responsive-sm">
 
             <thead>
                 <tr>
@@ -74,7 +74,7 @@
                         <td class="text-center text-success">{{palet.sCodigo}}</td>
                         <td class="text-center">
                             <a href="" 
-                                class="js-delete-codigoS" data-url="{{ path('codigoS_delete', {id: palet.id}) }}"
+                                class="js-palet-delete" data-url="{{ path('codigoS_delete', {id: palet.id}) }}"
                             >
                                 <span class="fas fa-skull-crossbones"></span>
                             </a>
@@ -96,5 +96,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/codigoS_delete.js') }}"></script>
+    <script src="{{ asset('assets/js/js-palet-delete.js') }}"></script>
 {% endblock %}

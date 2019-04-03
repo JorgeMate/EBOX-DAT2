@@ -66,7 +66,6 @@ class TrabajoController extends AbstractController
             ->getRepository(Trabajo::class)
             ->findOneBy(['id' => $id]);
 
-
             if(!$trabajo){
                 $trabajo = $this->getDoctrine()
                 ->getRepository(Trabajo::class)
@@ -129,5 +128,24 @@ class TrabajoController extends AbstractController
         return $this->render('recupera/trabajo/recupera.html.twig', []);
 
     }
+
+    /**
+     * @Route("/{id}/palets_articulo", methods={"GET"}, name="palets_articulo")
+     */
+    public function listaPT(Trabajo $trabajo){
+
+        $palets = $trabajo->getCodigoP();
+
+        //var_dump($palets);die;
+
+        return $this->render('recupera/trabajo/palets.html.twig', [
+            'palets' => $palets,
+        ]);
+
+
+
+    }
+
+
 
 }
