@@ -100,8 +100,20 @@ class TrabajoController extends AbstractController
                         $CodigoP->setIlote($ilote);
                         $CodigoP->setIUnidades($iunidades);
 
+                        $Trabajo = $CodigoP->getTrabajo();
+
+                        
+                        $CodigoP->setSDir1($Trabajo->getSDir1());
+                        $CodigoP->setSDir2($Trabajo->getSDir2());
+                        $CodigoP->setSDir3($Trabajo->getSDir3());
+                        $CodigoP->setSDir4($Trabajo->getSDir4());
+                        $CodigoP->setSDir5($Trabajo->getSDir5());
+                        $CodigoP->setSDir6($Trabajo->getSDir6());
+
+
                         $this->getDoctrine()->getManager()->persist($CodigoP);
                         $this->getDoctrine()->getManager()->flush();
+
                     }
                 }
 
