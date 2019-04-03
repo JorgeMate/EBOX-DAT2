@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class CodigoSController extends AbstractController
 {
     /**
-     * @Route("/nuevo_palets_semi", methods={"GET","POST"}, name="nuevo_palet_semi")
+     * @Route("/nuevo_palet_semi", methods={"GET","POST"}, name="nuevo_palet_semi")
      */
     public function nuevoPalet()
     {

@@ -9,18 +9,16 @@
 
     <div class="row justify-content-between">
 
-        <div class="column-6">
+        <div class="column-sm-8">
             <h4 class="text-success"><i class="fas fa-box"></i> ARTÍCULO</h4>
             {% if trabajo.IdAnterior %}
                 <h4 class="text-warning">{{ trabajo.IdAnterior }} | {{ trabajo.sTrabajo }}</h4>
             {% else %}
                 <h4 class="text-light">{{ trabajo.Id }} | {{ trabajo.sTrabajo }}</h4>
-            {% endif %}
-            
+            {% endif %}            
         </div>        
 
-
-        <div class="column-6 text-right">
+        <div class="column-sm-4 text-right">
             <a href="" class="btn btn-light btn-lg">
                 <i class="fa fa-edit" aria-hidden="true"></i> Seleccionar otro
             </a>
@@ -31,68 +29,81 @@
     <br>
     <br>
 
-    <div class="row">
 
-        <form class="form-inline" action="" method="post">
 
-            <div class="form-group">
-                <h5>Unidades &nbsp;&nbsp;</h5> 
+    <form class="form" action="" method="post">
+
+      <div class="form-row text-bottom">
+
+            <div class="form-group col-sm-2">
+                <h5>Unidades</h5> 
                 <input type="text" size="5" name="iunidades" id="iunidades" class="form-control-lg" value="{{ i_uds_palet }}">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
             </div>
     
-            <div class="form-group">
-                <h5>Lote &nbsp;&nbsp;</h5> 
+            <div class="form-group col-sm-3">
+                <h5>Lote</h5> 
                 <input type="text" size="8" name="ilote" id="ilote" class="form-control-lg" value="{{ i_lote }}">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
             </div>
     
 
-            <div class="form-group">
-                <h4><i class="fas fa-pallet"></i> Introduzca &nbsp;&nbsp;</h4> 
+            <div class="form-group col-sm-5">
+                <h5><i class="fas fa-pallet"></i> Introduzca</h5> 
                 <input type="text" pattern="[0-9]{10}" name="idpalet" id="idpalet" class="form-control-lg" placeholder="Código de PALET" required autofocus>
-                &nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-light btn-lg"> Insertar </button>  
+                
             </div>
 
-            <input id="id" name="id" type="hidden" value="{{ trabajo.Id }}">
-        
-        </form>        
+            <div class="form-group col-sm-2">
+                <button type="submit" class="btn btn-success btn-lg btn-block"> Insertar </button>  
+                <input id="id" name="id" type="hidden" value="{{ trabajo.Id }}">
+            </div>
 
-    </div>
+       </div>
+
+    </form>
+    
+    
 
     <br><br>
     
     
+    <table class="table table-sm table table-striped table-hoover table-responsive-sm">
 
-        <table class="table table-sm table-hoover table-borderless">
+        <thead>
+            <tr>
+                <td class="text-center">Unidades</td>
+                <td class="text-center">Lote</td>
+                <td class="text-center">Palet N.</td>
+                <td class="text-danger text-center">BORRAR</td>
+            </tr>    
+        </thead>
 
-            <thead>
+        <tbody>
+            {% for palet in palets %}
                 <tr>
-                    <td>Unidades</td>
-                    <td>Lote</td>
-                    <td>Palet N.</td>
-                    <td></td>
-                </tr>    
-            </thead>
+                    <td class="text-center text-success">{{palet.iUnidades}}</td>
+                    <td class="text-center text-success">{{palet.iLote}}</td>
+                    <td class="text-center text-success">{{palet.sCodigo}}</td>
+                    <td class="text-center">
+                        <a href="" 
+                            class="js-delete-codigoP" data-url="{{ path('codigoP_delete', {id: palet.id}) }}"
+                        >
+                            <span class="fas fa-skull-crossbones"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
 
-            <tbody>
-                {% for palet in palets %}
-                    <tr>
-                        <td>{{palet.iUnidades}}</td>
-                        <td>{{palet.iLote}}</td>
-                        <td>{{palet.sCodigo}}</td>
-                        <td></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-
-        </table>
-
-    
-
-
+    </table>
 
 </div>
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/codigoP_delete.js') }}"></script>
 {% endblock %}

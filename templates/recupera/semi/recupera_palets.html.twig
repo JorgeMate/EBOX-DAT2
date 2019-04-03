@@ -57,22 +57,28 @@
     
     <div class="row">
 
-        <table class="table table-sm table-hoover table-borderless table-responsive-sm">
+            <table class="table table-sm table table-striped table-hoover table-responsive-sm">
 
             <thead>
                 <tr>
-                    <td>Unidades</td>
-                    <td>Palet N.</td>
-                    <td></td>
+                    <td class="text-center">Unidades</td>
+                    <td class="text-center">Palet N.</td>
+                    <td class="text-danger text-center">BORRAR</td>
                 </tr>    
             </thead>
 
             <tbody>
                 {% for palet in palets %}
                     <tr>
-                        <td>{{palet.iUnidades}}</td>
-                        <td>{{palet.sCodigo}}</td>
-                        <td></td>
+                        <td class="text-center text-success">{{palet.iUnidades}}</td>
+                        <td class="text-center text-success">{{palet.sCodigo}}</td>
+                        <td class="text-center">
+                            <a href="" 
+                                class="js-delete-codigoS" data-url="{{ path('codigoS_delete', {id: palet.id}) }}"
+                            >
+                                <span class="fas fa-skull-crossbones"></span>
+                            </a>
+                        </td>    
                     </tr>
                 {% endfor %}
             </tbody>
@@ -86,4 +92,9 @@
 </div>
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/codigoS_delete.js') }}"></script>
 {% endblock %}

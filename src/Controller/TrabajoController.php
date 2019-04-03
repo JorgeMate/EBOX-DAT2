@@ -52,7 +52,7 @@ class TrabajoController extends AbstractController
     }
 
     /**
-     * @Route("/recupera_articulo", name="recupera_trabajo")
+     * @Route("/recupera_articulo", methods={"GET","POST"}, name="recupera_trabajo")
      */
     public function recupera(Request $request)
     {
@@ -81,16 +81,29 @@ class TrabajoController extends AbstractController
 
                 if($idpalet){
 
-                    // Insertamos un Palet
-                    $CodigoP = new CodigoP();
+                    // Es una palet inexistente ?
 
-                    $CodigoP->setTrabajo($trabajo);
-                    $CodigoP->setSCodigo($idpalet);
-                    $CodigoP->setIlote($ilote);
-                    $CodigoP->setIUnidades($iunidades);
+                    $encontrado = $this->getDoctrine()
+                                    ->getRepository(CodigoP::class)
+                                    ->findOneBy(['s_codigo' => $idpalet]);
 
-                    $this->getDoctrine()->getManager()->persist($CodigoP);
-                    $this->getDoctrine()->getManager()->flush();
+                    if($encontrado){
+
+                        $this->addFlash('danger', 'El PALET ya está REGISTRADO');
+
+                    } else {
+
+                        // Insertamos un Palet
+                        $CodigoP = new CodigoP();
+
+                        $CodigoP->setTrabajo($trabajo);
+                        $CodigoP->setSCodigo($idpalet);
+                        $CodigoP->setIlote($ilote);
+                        $CodigoP->setIUnidades($iunidades);
+
+                        $this->getDoctrine()->getManager()->persist($CodigoP);
+                        $this->getDoctrine()->getManager()->flush();
+                    }
                 }
 
                 $palets = $this->getDoctrine()

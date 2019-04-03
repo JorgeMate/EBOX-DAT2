@@ -82,16 +82,28 @@ class SemiController extends AbstractController
 
                 if($idpalet){
 
-                    // Insertamos un Palet
-                    $CodigoS = new CodigoS();
+                    // Es una palet inexistente ?
 
-                    $CodigoS->setSemi($semi);
-                    $CodigoS->setSCodigo($idpalet);
-                    $CodigoS->setIUnidades($iunidades);
+                    $encontrado = $this->getDoctrine()
+                        ->getRepository(CodigoS::class)
+                        ->findOneBy(['s_codigo' => $idpalet]);
 
-                    $this->getDoctrine()->getManager()->persist($CodigoS);
-                    $this->getDoctrine()->getManager()->flush();
-    
+                    if($encontrado){
+
+                        $this->addFlash('danger', 'El PALET ya está REGISTRADO');
+
+                    } else {
+
+                        // Insertamos un Palet
+                        $CodigoS = new CodigoS();
+
+                        $CodigoS->setSemi($semi);
+                        $CodigoS->setSCodigo($idpalet);
+                        $CodigoS->setIUnidades($iunidades);
+
+                        $this->getDoctrine()->getManager()->persist($CodigoS);
+                        $this->getDoctrine()->getManager()->flush();
+                    }
                 }
 
                 $palets = $this->getDoctrine()

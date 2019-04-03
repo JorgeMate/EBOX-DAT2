@@ -12,6 +12,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use App\Repository\ClienteRepository;
 
+use App\Entity\CodigoP;
+use App\Entity\CodigoS;
+
 use App\Entity\Semi;
 use App\Entity\Trabajo;
 
@@ -28,6 +31,30 @@ use App\Form\TrabajoType;
  */
 class AdminController extends AbstractController
 {
+
+    /**
+     * @Route("/codigoP/{id}", methods={"DELETE"}, name="codigoP_delete")
+     */
+    public function deleteCodigoP(CodigoP $codigoP)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($codigoP);
+        $em->flush();
+        return new Response(null, 204);
+    }
+
+    /**
+     * @Route("/codigoS/{id}", methods={"DELETE"}, name="codigoS_delete")
+     */
+    public function deleteCodigoS(CodigoS $codigoS)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($codigoS);
+        $em->flush();
+        return new Response(null, 204);
+    }
 
 
     /**
@@ -106,8 +133,6 @@ class AdminController extends AbstractController
     {
 
         $trabajo = new Trabajo();
-
-    
 
         $form = $this->createForm(TrabajoType::class, $trabajo);
         $form->handleRequest($request);

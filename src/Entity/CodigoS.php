@@ -27,7 +27,7 @@ class CodigoS
     private $i_externo;
 
     /**
-     * @ORM\Column(type="string", length=10, unique=true)
+     * @ORM\Column(type="string", length=10, unique=true, options={"comment":"El código de palet tiene que ser único"})
      */
     private $s_codigo;
 
