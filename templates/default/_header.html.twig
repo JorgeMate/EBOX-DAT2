@@ -1,0 +1,130 @@
+{% block header %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('logout') }}"><img src="{{ asset('assets/images/logoKS80x50.png') }}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="nav navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_cpanel') }}">
+                            <i class="fa fa-home" aria-hidden="true"></i> PANEL (RECUPERACIÓN)
+                        </a>
+                    </li>
+
+                    {% if app.user %} 
+
+                        {% if false %} 
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Contact</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+
+                        {% endif %}
+                        
+                        <li class="nav-item">
+                            &nbsp;        
+                        </li>
+
+
+                        {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+
+                             <a class="nav-link" href="{{ path('admin') }}">
+                                <i class="fa fa-lock" aria-hidden="true"></i> Administración
+                            </a>
+
+                        {% endif %}    
+                        
+                    {% endif %}
+
+                </ul>    
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+
+                        <li class="nav-item dropdown">
+
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="caret"></span>
+                                <span class="sr-only">{{ app.user.email }}</span>
+                            </a>
+                            
+                            <ul class="dropdown-menu user" role="menu" aria-labelledby="user">
+    
+                                {% if is_granted('ROLE_SUPER_ADMIN') %} 
+                                    <li>
+                                        <a class="nav-link" href="{{ path('super_cpanel') }}">
+                                            <i class="fas fa-tools" aria-hidden="true"></i> Super Admin. 
+                                        </a>
+                                    </li>
+                                {% endif %} 
+
+                                {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+                                    <li>
+                                        <a class="nav-link" href="{{ path('admin_cpanel') }}">
+                                                <i class="fas fa-key text-info" aria-hidden="true"></i></i> Control
+                                        </a>
+                                    </li>
+                                {% endif %} 
+                                
+                                <li>
+                                    <a class="nav-link" href="{{ path('user_edit') }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i> Usuario
+                                    </a>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <a class="nav-link" href="{{ path('security_logout') }}">
+                                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    {% endif %}
+
+
+                {% if app.user %}           
+
+                    <li class="nav-item">
+
+                    </li>                                         
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                {% endif %}
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>   
+
+{% endblock %} 

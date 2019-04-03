@@ -21,16 +21,24 @@
 
             {% block body %}
 
-                <div id="main">                        
+                <div class="row">
 
-                    {{ include('default/_flash_messages.html.twig') }}
+                    <div class="col-sm-9">
 
-                    {% block main %}
-                    {% endblock %}
-            
-                </div>
+                        <div id="main">                        
+                            {{ include('default/_flash_messages.html.twig') }}
+                            {% block main %}
+                            {% endblock %}
+                        </div>
 
-            </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        {% block sidebar %}
+                        {% endblock %}
+                    </div>                
+
+                </div
 
             {% endblock %}
 

@@ -1,45 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'base9.html.twig' %}
 
-{% block title %}Semielaborados{% endblock %}
+{% block title %}Nuevo Semielaborado{% endblock %}
 
 {% block main %}
-
-<div class="container">
 
     <h4 class="text-warning">Recuperación de Semielaborado ANTERIOR</h4>
     <br>
 
+    {{ form_start(form) }}
 
-    <div class="row">
+        {{ form_widget(form) }}
 
-        <div class="col-2"></div>
-
-    
-        <div class="col-8">
-
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-
-            <br>
-
-            <div class="text-right">
-
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
-                </button>
-            
-
-            </div>
-            
-            {{ form_end(form) }}    
-        
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fa fa-save" aria-hidden="true"></i> Guardar
+            </button>
         </div>
-
-        <div class="col-2"></div>
-
-    </div>
-
-    <br>    
-
-
+    
+    {{ form_end(form) }}    
+            
 {% endblock %}

@@ -13,8 +13,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Repository\ClienteRepository;
 
 use App\Entity\Semi;
+use App\Entity\Trabajo;
 
 use App\Form\SemiType;
+use App\Form\TrabajoType;
 
 
 /**
@@ -77,20 +79,16 @@ class AdminController extends AbstractController
             if ($semiId){
 
                 $this->addFlash('danger', 'El Semielaborado ya EXISTE');
-
                 return $this->redirectToRoute('recupera_semi');
 
             } else {
 
                 $this->getDoctrine()->getManager()->persist($semi);
                 $this->getDoctrine()->getManager()->flush();
-
                 $this->addFlash('success', 'Semielaborado insertado correctamente');
 
                 return $this->redirectToRoute('semis');
-
             }
-
         }
 
         return $this->render('semi/new.html.twig', [
@@ -104,8 +102,48 @@ class AdminController extends AbstractController
     /**
      * @Route("/articulo/nuevo", methods={"GET", "POST"}, name="new_trabajo")
      */
-    public function newTrabajo(): Response
+    public function newTrabajo(Request $request): Response
     {
+
+        $trabajo = new Trabajo();
+
+    
+
+        $form = $this->createForm(TrabajoType::class, $trabajo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Comprobamos que no hay un id anterior que se corresponda a id_anterior
+
+            $trabajoAnterior = $trabajo->getIdAnterior();
+
+            $trabajoId = $this->getDoctrine()
+            ->getRepository(Trabajo::class)
+            ->findOneBy(['id' => $trabajoAnterior]);
+
+            if ($trabajoId){
+
+                $this->addFlash('danger', 'El Artículo ya EXISTE');
+                return $this->redirectToRoute('recupera_trabajo');
+
+            } else {
+
+                $this->getDoctrine()->getManager()->persist($trabajo);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Artículo insertado correctamente');
+
+                return $this->redirectToRoute('trabajos');
+            }
+        }
+
+    
+
+        return $this->render('trabajo/new.html.twig', [
+           'trabajo' => $trabajo,
+           'form' => $form->createView(),
+        ]);
+
         
     }
 

@@ -1,0 +1,26 @@
+{% extends 'base9.html.twig' %}
+
+{% block title %}Nuevo Artículo{% endblock %}
+
+{% block main %}
+
+<div class="container">
+
+    <h4 class="text-warning">Recuperación de Artículo ANTERIOR</h4>
+    <br>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fa fa-save" aria-hidden="true"></i> Guardar
+        </button>
+    </div>
+
+    {{ form_end(form) }}    
+
+</div>
+
+{% endblock %}

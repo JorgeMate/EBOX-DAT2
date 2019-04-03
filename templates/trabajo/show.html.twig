@@ -9,54 +9,145 @@
 <br>
 <br>
 
-<div class="row">
 
-    <div class="col-6">
 
-        <table class="table">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><h5>General/Etiquetado</h5></a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><h5>Paletización</h5></a>
+            <a class="nav-item nav-link" id="nav-3-tab" data-toggle="tab" href="#nav-3" role="tab" aria-controls="nav-profile" aria-selected="false"><h5><i class="fas fa-key text-info" aria-hidden="true"> </i>Datos económicos</h5></a>            
+        </div>
+    </nav>
 
-            <tr>
-                <td>Unidades.</td>
-                <td>{{ trabajo.IUnidades }}</td>
-            </tr>
-            <tr>
-                <td>Código Artículo</td>
-                <td>{{ trabajo.SCodArt }}</td>
-            </tr>
-            <tr>
-                <td>Orden de compra</td>
-                <td>{{ trabajo.SOrdenDeCompra }}</td>
-            </tr>
-            <tr>
-                <td>Notas</td>
-                <td>{{ trabajo.MtNotas }}</td>
-            </tr>
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            
+            <br>
+
+            <div class="row">
+
+            <div class="col-6">
+
+                <table class="table table-borderless table-hover table-sm">
+
+                    <tbody>
+
+                        <tr>
+                            <td>COD. Artículo</td>
+                            <td>{{ trabajo.SCodArt }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Orden de compra</td>
+                            <td>{{ trabajo.SOrdenDeCompra }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección de entrega</td>
+                            <td>
+                                {{ trabajo.SDir1 }}
+                                {% if trabajo.SDir2 %}
+                                    <br>{{ trabajo.SDir2 }}
+                                {% endif %}
+                                {% if trabajo.SDir3 %}
+                                    <br>{{ trabajo.SDir3 }}
+                                {% endif %}
+                                {% if trabajo.SDir4 %}
+                                    <br>{{ trabajo.SDir4 }}
+                                {% endif %}
+                                {% if trabajo.SDir5 %}
+                                    <br>{{ trabajo.SDir5 }}
+                                {% endif %}
+                                {% if trabajo.SDir6 %}
+                                    <br>{{ trabajo.SDir6 }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tipo de Palet</td>
+                            <td>{{ trabajo.STipoPalet }}</td>
+                        </tr>
                                     
-        </table>
-                
-    </div>    
+                        <tr>
+                            <td>Notas</td>
+                            <td>{{ trabajo.MtNotas }}</td>
+                        </tr>
+                        <tr>
+                            <td>Incluir N. de LOTE en la etiqueta</td>
+                            <td>    {% if trabajo.SDir2 %}
+                                        SI
+                                    {% else %}
+                                        NO
+                                    {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-box-open"></i> Trazabilidad del Semielaborado</td>
+                            <td></td>
+                        </tr>
 
-    <div class="col-6">
+                    </tbody>
+                                            
+                </table>
+                        
+            </div>    
 
-        <table class="table">
+            <div class="col-6">
 
-            <tr>
-                <td>Finalizado</td>
-                <td>{{ trabajo.iFinalizado }}</td>
-            </tr>
-            <tr>
-                <td>Tipo Palet</td>
-                <td>{{ trabajo.STipoPalet }}</td>
-            </tr>
-            <tr>
-                <td>En 2 Palets distintos</td>
-                <td>{{ trabajo.IEn2Pal }}</td>
-            </tr>
-                                        
-        </table>
+                <table class="table table-borderless table-hover">
 
+                    <tbody>
 
-    </div>    
+                        <tr>
+                            <td>Pedido en Producción</td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td>Unidades del pedido</td>
+                            <td>{{ trabajo.IUnidades|number_format(0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Paletización</td>
+                            <td>
+                                {% if trabajo.IEnCajas == 0 %}
+                                    NINGUNA
+                                {% elseif trabajo.IEnCajas == 2 %}
+                                    A Granell
+                                {% else %}    
+                                    En Cajas
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Activo (En producción)</td>
+                            <td>{{ trabajo.IActivo }}</td>
+                        </tr>
+            
+
+                        <tr>
+                            <td>Etiquetas X Palet</td>
+                            <td>{{ trabajo.IEtiDefecto }}</td>
+                        </tr>
+
+                    </tbody>
+                                                
+                </table>
+
+            </div>
+
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        </div>
+
+        <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
+        </div>
+    
+
+    </div>
     
 </div>
 

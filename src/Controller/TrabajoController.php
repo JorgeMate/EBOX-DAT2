@@ -32,7 +32,6 @@ class TrabajoController extends AbstractController
     {
         return $this->render('trabajo/show.html.twig', [
             'trabajo' => $trabajo,
-            
         ]);
         
     }

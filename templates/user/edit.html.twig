@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base9.html.twig' %}
 
 {% block body_id 'user_edit' %}
 
@@ -31,14 +31,24 @@
         {{ form_widget(form) }}
 
             <div class="form-group row">
+
                 <div class="col-sm-2">
                 </div>
-                <div class="col-sm-8">
+
+                <div class="col-sm-6">
 
                     <button type="submit" class="btn btn-lg btn-primary">
                         <i class="fa fa-save" aria-hidden="true"></i> Guardar
                     </button>
+
+                    &nbsp;&nbsp;
+
+                    <a href="{{ path('user_cpanel') }}" class="btn btn-lg btn-secondary">
+                        <i class="fas fa-undo"></i> Salir
+                    </a>
+            
                 </div>
+
             </div>
 
 
@@ -64,7 +74,7 @@
                 {{ path('user_change_password') }}
             {% endif %}
             " class="btn btn-lg btn-block btn-danger">
-                <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.change_password'|trans }}
+                <i class="fa fa-lock" aria-hidden="true"></i> {{ 'Cambiar mi contraseña' }}
             </a>
 
         </div>
@@ -72,7 +82,8 @@
         <div class="row">
             &nbsp;
         </div>
-        
+
+      
         {% if app.user.id != user.id %}
         <div class="row">
 
