@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recuperación{% endblock %}
+
+{% block main %}
+
+
+<div class="container">
+
+    <div class="row justify-content-between">
+
+        <div class="column-6">
+            <h4 class="text-success"><i class="fas fa-box"></i> ARTÍCULO</h4>
+            {% if trabajo.IdAnterior %}
+                <h4 class="text-warning">{{ trabajo.IdAnterior }} | {{ trabajo.sTrabajo }}</h4>
+            {% else %}
+                <h4 class="text-light">{{ trabajo.Id }} | {{ trabajo.sTrabajo }}</h4>
+            {% endif %}
+            
+        </div>        
+
+
+        <div class="column-6 text-right">
+            <a href="" class="btn btn-light btn-lg">
+                <i class="fa fa-edit" aria-hidden="true"></i> Seleccionar otro
+            </a>
+        </div>        
+
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+
+        <form class="form-inline" action="" method="post">
+
+            <div class="form-group">
+                <h5>Unidades &nbsp;&nbsp;</h5> 
+                <input type="text" size="5" name="iunidades" id="iunidades" class="form-control-lg" value="{{ i_uds_palet }}">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+    
+            <div class="form-group">
+                <h5>Lote &nbsp;&nbsp;</h5> 
+                <input type="text" size="8" name="ilote" id="ilote" class="form-control-lg" value="{{ i_lote }}">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+    
+
+            <div class="form-group">
+                <h4><i class="fas fa-pallet"></i> Introduzca &nbsp;&nbsp;</h4> 
+                <input type="text" pattern="[0-9]{10}" name="idpalet" id="idpalet" class="form-control-lg" placeholder="Código de PALET" required autofocus>
+                &nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-light btn-lg"> Insertar </button>  
+            </div>
+
+            <input id="id" name="id" type="hidden" value="{{ trabajo.Id }}">
+        
+        </form>        
+
+    </div>
+
+    <br><br>
+    
+    
+
+        <table class="table table-sm table-hoover table-borderless">
+
+            <thead>
+                <tr>
+                    <td>Unidades</td>
+                    <td>Lote</td>
+                    <td>Palet N.</td>
+                    <td></td>
+                </tr>    
+            </thead>
+
+            <tbody>
+                {% for palet in palets %}
+                    <tr>
+                        <td>{{palet.iUnidades}}</td>
+                        <td>{{palet.iLote}}</td>
+                        <td>{{palet.sCodigo}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    
+
+
+
+</div>
+
+
+{% endblock %}

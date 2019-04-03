@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use App\Repository\TrabajoRepository;
 use App\Entity\Trabajo;
 
+use App\Entity\CodigoP;
 
 /**
  * Controller used to manage current user.
@@ -57,6 +58,7 @@ class TrabajoController extends AbstractController
     {
 
         $id = $request->request->get('id');
+        $ilote = 0;
         
         if($id){
 
@@ -75,6 +77,34 @@ class TrabajoController extends AbstractController
 
                 $iunidades = $request->request->get('iunidades');
                 $idpalet = $request->request->get('idpalet');
+                $ilote = $request->request->get('ilote');
+
+                if($idpalet){
+
+                    // Insertamos un Palet
+                    $CodigoP = new CodigoP();
+
+                    $CodigoP->setTrabajo($trabajo);
+                    $CodigoP->setSCodigo($idpalet);
+                    $CodigoP->setIlote($ilote);
+                    $CodigoP->setIUnidades($iunidades);
+
+                    $this->getDoctrine()->getManager()->persist($CodigoP);
+                    $this->getDoctrine()->getManager()->flush();
+                }
+
+                $palets = $this->getDoctrine()
+                ->getRepository(CodigoP::class)
+                ->findBy(['trabajo' => $id]);
+
+                return $this->render('recupera/trabajo/recupera_palets.html.twig', [
+                    'idpalet' => $idpalet,
+                    'i_lote' => $ilote,
+                    'i_uds_palet' =>$iunidades,
+                    'trabajo' => $trabajo,
+                    'palets' => $palets,
+                ]);
+
 
             } else {
 

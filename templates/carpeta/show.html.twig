@@ -14,7 +14,7 @@
 
         <h4><i class="fas fa-box"></i> Artículos relacionados</h4>
 
-        <table class="table table-hover js-trabajos-table">
+        <table class="table table-borderless table-hover table-sm">
 
             <tbody>
         
@@ -35,14 +35,14 @@
 
         <h4><i class="fas fa-box-open"></i> Semielaborados relacionados</h4>
 
-        <table class="table table-hover js-semis-table">
+        <table class="table table-borderless table-hover table-sm">
 
             <tbody>
         
                 {% for semi in semis %}
                 <tr>
-                    <td>{{ semi.id }}</td>    
                     <td><a href="{{ path('semi_show', {id: semi.id}) }}">{{ semi.SSemi }}</a></td>    
+                    <td>{{ semi.id }}</td>  
                 </tr>
                 {% endfor %}
         

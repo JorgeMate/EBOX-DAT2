@@ -54,7 +54,7 @@ class Trabajo
     private $mt_notas;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_finalizado;
 
@@ -64,12 +64,12 @@ class Trabajo
     private $s_tipo_palet;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_en2pal;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="smallint", options={"default" : 0})
      */
     private $i_en_cajas;
 
@@ -89,47 +89,47 @@ class Trabajo
     private $s_apilado;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $i_uds_planta;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_plantas_par;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_plantas_impar;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_peso_par;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_peso_impar;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_cantoneras;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_tapado;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_alt_par;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_alt_impar;
 
@@ -144,12 +144,12 @@ class Trabajo
     private $s_dimension_caja;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_uds_caja;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $i_cajas_planta;
 
@@ -189,57 +189,57 @@ class Trabajo
     private $s_dir6;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_eti_x_caja;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 0})
      */
     private $n_kg_x_caja;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="smallint", nullable=true, options={"default" : 1})
      */
     private $i_eti_defecto;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : true})
      */
     private $i_activo;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_lote;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $idsemi_pedido;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, options={"default" : 0})
      */
     private $n_peso_palet;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, options={"default" : 0})
      */
     private $valor;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
      */
     private $i_extranjero;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, options={"default" : 0})
      */
     private $manod;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, options={"default" : 0})
      */
     private $venta;
 
@@ -249,7 +249,7 @@ class Trabajo
     private $t_changed;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $i_changed;
 
@@ -259,7 +259,7 @@ class Trabajo
     private $t_added;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $i_added;
 

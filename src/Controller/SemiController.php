@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -15,7 +15,7 @@ use App\Entity\Semi;
 
 use App\Entity\CodigoS;
 
-use App\Form\SemiType;
+//use App\Form\SemiType;
 
 
 /**
