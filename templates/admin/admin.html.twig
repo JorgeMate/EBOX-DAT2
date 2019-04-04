@@ -4,16 +4,7 @@
 
 {% block main %}
 
-    <div class="row">
-        <div class="col">
-            <img src="{{ asset('assets/images/logo eurobox.jpg') }}">
-        </div>
-        <div class="col">
-            <div class="text-right">
-                <h5>{{user.email}}</h5>
-            </div>
-        </div>
-    </div>
+    {{ include('default/_credentials.html.twig') }}
 
     <div class="row">
         <div class="col">

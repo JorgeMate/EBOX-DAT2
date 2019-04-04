@@ -20,9 +20,9 @@ use App\Form\Type\ChangePasswordType;
 
 
 /**
- * Controller used to manage current user.0034 636 831 823
+ * Controller used to manage current user.
  *
- * @Route("/user")
+ * @Route("/usuario")
  * @Security("is_granted('ROLE_USER')")
  *
  */
@@ -42,7 +42,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile/edit", methods={"GET", "POST"}, name="user_edit")
+     * @Route("/datos", methods={"GET", "POST"}, name="user_edit")
      */
     public function edit(Request $request): Response
     {
@@ -69,7 +69,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile/change-password", methods={"GET", "POST"}, name="user_change_password")
+     * @Route("/cambiar_contrasena", methods={"GET", "POST"}, name="user_change_password")
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $encoder): Response
     {

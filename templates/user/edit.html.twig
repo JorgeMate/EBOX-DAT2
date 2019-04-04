@@ -14,13 +14,10 @@
     <div class="row justify-content-between">
 
         <div class="col">
-            <h3>Datos del usuario</h3>
+            <h3>Mis datos del usuario</h3>
         </div>        
         <div class="col text-right">
-           <h5>Fecha de Alta: {{user.createdAt|date("d/m/Y") }} </h5>
-            {% if 'ROLE_ADMIN' in user.roles %}
-                {{ 'Administrador' }} <i class="fas fa-key text-info"></i> 
-            {% endif %}        
+
         </div>     
     </div>    
 
@@ -69,13 +66,15 @@
 
             <a href="
             {% if app.user.id != user.id %}
-                {{ path('user_id_change_password', {id:user.id}) }}    
+                
             {% else %}
                 {{ path('user_change_password') }}
             {% endif %}
             " class="btn btn-lg btn-block btn-danger">
                 <i class="fa fa-lock" aria-hidden="true"></i> {{ 'Cambiar mi contraseña' }}
             </a>
+            
+
 
         </div>
 
@@ -83,19 +82,7 @@
             &nbsp;
         </div>
 
-      
-        {% if app.user.id != user.id %}
-        <div class="row">
-
-            {# Cambiamos la contraseña propia o la de otro usuario !? #} 
-
-            <a href="{{ path('email_user', {id:user.id}) }}" class="btn btn-lg btn-block btn-warning js-send-email_user">
-                <i class="far fa-envelope-open"></i> {{ 'action.user_email'|trans }}
-            </a>
-
-        </div>
-        {% endif %}
-
+   
     </div>
 
     {{ parent() }}

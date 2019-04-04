@@ -1,0 +1,72 @@
+{% extends 'base9.html.twig' %}
+
+{% block body_id 'user_edit' %}
+
+{% block main %}
+
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %} 
+
+        {#} Breadcrumb #}
+
+    {% endif %}
+
+    
+    <div class="row justify-content-between">
+
+        <div class="col">
+            <h3>Datos del usuario</h3>
+        </div>        
+        <div class="col text-right">
+           <h5>Fecha de Alta: {{user.createdAt|date("d/m/Y") }} </h5>
+
+            {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                Propietario <i class="fas fa-key text-warning"></i>
+            {% elseif 'ROLE_ADMIN' in user.roles %}
+                Administrador <i class="fas fa-key text-info"></i>
+            {% elseif 'ROLE_AUTO' in user.roles %}
+                Usuario Autorizado <i class="fas fa-key text-secondary"></i>
+            {% endif %}
+        
+        </div>     
+    </div>    
+
+    <br>  
+
+    {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        <div class="form-group row">
+
+            <div class="col-sm-2">
+            </div>
+
+            <div class="col-sm-6">
+
+                <button type="submit" class="btn btn-lg btn-primary">
+                    <i class="fa fa-save" aria-hidden="true"></i> Guardar
+                </button>
+      
+            </div>
+
+        </div>
+
+    {{ form_end(form) }}
+
+    </br>
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+    <div class="section">
+        <a href="{{ path('usuarios') }}" class="btn btn-lg btn-block btn btn-success">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'Lista de usuarios' }}
+        </a>
+    </div>
+
+    {{ parent() }}
+
+    
+{% endblock %}

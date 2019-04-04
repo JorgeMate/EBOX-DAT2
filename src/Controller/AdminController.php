@@ -11,15 +11,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use App\Repository\ClienteRepository;
+use App\Repository\UserRepository;
 
 use App\Entity\CodigoP;
 use App\Entity\CodigoS;
 
-use App\Entity\Semi;
-use App\Entity\Trabajo;
+use App\Entity\User;
 
-use App\Form\SemiType;
-use App\Form\TrabajoType;
+use App\Form\NewUserType;
+use App\Form\UserType;
+
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -31,6 +33,110 @@ use App\Form\TrabajoType;
  */
 class AdminController extends AbstractController
 {
+
+   /**
+     * @Route("/usuarios", methods={"GET"}, name="usuarios")
+     * 
+     * LISTAR todos los usuarios
+     */
+    public function usuarios(UserRepository $usuarios): Response
+    {
+        
+        $user = $this->getUser();
+        $usuarios = $usuarios->findAll();
+
+        return $this->render('admin/users/index.html.twig', [
+            
+            'user' => $user,
+            'usuarios' => $usuarios,
+        ]);
+    }
+
+    /**
+     * @Route("/usuario/nuevo", methods={"GET", "POST"}, name="usuario_nuevo")
+     * 
+     * NUEVO usuario 
+     */
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    {   // pasamos el usuario para el voter
+    
+        $userX = new User();
+
+        $userX->setEnabled(true);
+        $userX->setEmail('');
+        $userX->setPassword('');
+
+        $roles[] = 'ROLE_ADMIN';
+        $userX->setRoles($roles);
+
+        $form = $this->createForm(NewUserType::class, $userX);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $userX->setPassword($encoder->encodePassword($userX, $form->get('password')->getData()));
+
+            $this->getDoctrine()->getManager()->persist($userX);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Registro insertado correctamente');
+
+            return $this->redirectToRoute('usuarios', []);
+        }
+
+        return $this->render('admin/users/new.html.twig', [
+            'user' => $userX,
+            'form' => $form->createView(),
+            'sidebarContent' => '',
+        ]);
+
+
+
+
+    }
+
+ /**
+     * @Route("/usuario/{id}/editar", methods={"GET", "POST"}, name="usuario_id_edit")
+     * 
+     * EDITAR otro usuario del mismo centro, cualquiera si es SUPER_ADMIN 
+     */
+    public function editUser(Request $request, User $user): Response
+    {
+        //$this->denyAccessUnlessGranted('USER_EDIT', $user);
+        ///////////////////////////////////////////////////
+
+
+        // if($user->getId() == $security->getUser()->getId()){
+
+
+        // } else {
+
+        $form = $this->createForm(UserType::class, $user);
+
+        // }
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Usuario actualizado correctamente');
+
+            return $this->redirectToRoute('usuarios', []);
+        }
+
+        
+        return $this->render('admin/users/edit.html.twig', [
+        
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
+
 
     /**
      * @Route("/codigoP/{id}", methods={"DELETE"}, name="codigoP_delete")
@@ -83,94 +189,6 @@ class AdminController extends AbstractController
     }
 
 
-    /**
-     * @Route("/semielaborado/nuevo", methods={"GET", "POST"}, name="new_semi")
-     */
-    public function newSemi(Request $request): Response
-    {
-        $semi = new Semi();
-
-        $form = $this->createForm(SemiType::class, $semi);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // Comprobamos que no hay un id anterior que se corresponda a id_anterior
-
-            $semiAnterior = $semi->getIdAnterior();
-
-            $semiId = $this->getDoctrine()
-            ->getRepository(Semi::class)
-            ->findOneBy(['id' => $semiAnterior]);
-
-            if ($semiId){
-
-                $this->addFlash('danger', 'El Semielaborado ya EXISTE');
-                return $this->redirectToRoute('recupera_semi');
-
-            } else {
-
-                $this->getDoctrine()->getManager()->persist($semi);
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash('success', 'Semielaborado insertado correctamente');
-
-                return $this->redirectToRoute('semis');
-            }
-        }
-
-        return $this->render('semi/new.html.twig', [
-            'semi' => $semi,
-            'form' => $form->createView(),
-        ]);
-
-    }
-
-
-    /**
-     * @Route("/articulo/nuevo", methods={"GET", "POST"}, name="new_trabajo")
-     */
-    public function newTrabajo(Request $request): Response
-    {
-
-        $trabajo = new Trabajo();
-
-        $form = $this->createForm(TrabajoType::class, $trabajo);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // Comprobamos que no hay un id anterior que se corresponda a id_anterior
-
-            $trabajoAnterior = $trabajo->getIdAnterior();
-
-            $trabajoId = $this->getDoctrine()
-            ->getRepository(Trabajo::class)
-            ->findOneBy(['id' => $trabajoAnterior]);
-
-            if ($trabajoId){
-
-                $this->addFlash('danger', 'El Artículo ya EXISTE');
-                return $this->redirectToRoute('recupera_trabajo');
-
-            } else {
-
-                $this->getDoctrine()->getManager()->persist($trabajo);
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash('success', 'Artículo insertado correctamente');
-
-                return $this->redirectToRoute('trabajos');
-            }
-        }
-
-    
-
-        return $this->render('trabajo/new.html.twig', [
-           'trabajo' => $trabajo,
-           'form' => $form->createView(),
-        ]);
-
-        
-    }
 
 
     /**

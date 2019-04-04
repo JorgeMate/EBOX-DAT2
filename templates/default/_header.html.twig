@@ -22,25 +22,25 @@
 
                         {% if false %} 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                    
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Contact</a>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Contact</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
 
                         {% endif %}
                         
@@ -49,10 +49,10 @@
                         </li>
 
 
-                        {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+                        {% if is_granted('ROLE_AUTO') %} 
 
                              <a class="nav-link" href="{{ path('admin') }}">
-                                <i class="fa fa-lock" aria-hidden="true"></i> Administración
+                                    <i class="fas fa-key text-secondary"></i> Administración
                             </a>
 
                         {% endif %}    
@@ -63,7 +63,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+                    {% if is_granted('ROLE_AUTO') %} 
 
                         <li class="nav-item dropdown">
 
@@ -77,8 +77,8 @@
     
                                 {% if is_granted('ROLE_SUPER_ADMIN') %} 
                                     <li>
-                                        <a class="nav-link" href="{{ path('super_cpanel') }}">
-                                            <i class="fas fa-tools" aria-hidden="true"></i> Super Admin. 
+                                        <a class="nav-link" href="{{ path('admin_cpanel') }}">
+                                                <i class="fas fa-key text-warning"></i> Super Admin. 
                                         </a>
                                     </li>
                                 {% endif %} 

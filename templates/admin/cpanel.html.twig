@@ -4,37 +4,22 @@
 
 {% block main %}
 
-    <div class="row">
-        <div class="col">
-            <img src="{{ asset('assets/images/logo eurobox.jpg') }}">
-        </div>
-        <div class="col">
-            <div class="text-right">
-                <h5>{{user.email}}</h5>
-            </div>
-        </div>
-    </div>
+    {{ include('default/_credentials.html.twig') }}
 
     <div class="row">
+
+        <div class="col"></div>
         <div class="col">
-        </div>
-        <div class="col">
 
-
-
-            <h4><i class="fas fa-user-shield"></i> Control de Usuarios</h4>
+            <h4><a href="{{ path('usuarios') }}"><i class="fas fa-user-shield"></i> Control de Usuarios</a></h4>
             <h4></h4>
             <br>
             <h4><i class="far fa-clock"></i> Informes de marcajes y tiempos</h4>
             <h4></h4>
             <h4><i class="fas fa-users-cog"></i> Operarios registrados</h4>
 
-
         </div>
-        <div class="col">
-        </div>
+        <div class="col"></div>
     </div>
     
-
-
 {% endblock %}

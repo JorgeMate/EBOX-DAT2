@@ -5,20 +5,8 @@
 
 {% block main %}
 
+{{ include('default/_credentials.html.twig') }}
 
-<div class="row">
-    <div class="col">
-        <img src="{{ asset('assets/images/logo eurobox.jpg') }}">
-    </div>
-    <div class="col">
-        <div class="text-right">            
-            <h5>{{user.email}}</h5>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
 
 <div class="row">
     <div class="col-3">
@@ -27,8 +15,7 @@
         <h4><i class="fas fa-box"></i> <a href="{{ path('recupera_trabajo') }}">RECUPERACIÓN de PALETS de Artículos</a></h4>
     </div>
     <div class="col-2">
-    </div>
-            
+    </div>  
 </div>
 
 <br>
@@ -41,8 +28,7 @@
         <h4><i class="fas fa-box-open"></i> <a href="{{ path('recupera_semi') }}">RECUPERACIÓN de PALETS de Semielaborados</a></h4>
     </div>
     <div class="col-2">
-    </div>
-            
+    </div>       
 </div>
 
 

@@ -191,13 +191,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAdmin(){
-
-        if (in_array('ROLE_ADMIN', $this->getRoles()) 
-                || in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
-            return true;
-        }
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -207,6 +200,54 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getAdmin(){
+
+        if (in_array('ROLE_ADMIN', $this->getRoles()) 
+                || in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
+            return true;
+        }
+    }
+
+    public function setAdmin(bool $admin)
+    {
+
+        if (!in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
+
+            if($admin){                
+                    $this->setRoles(['ROLE_ADMIN']);
+                    $this->setEnabled(true);
+            } else {
+                $this->setRoles([]);            
+            }
+        }
+        
+        return $this;
+    }
+
+    public function getAuto(){
+        if (in_array('ROLE_AUTO', $this->getRoles()) 
+                || in_array('ROLE_ADMIN', $this->getRoles()) 
+                || in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
+            return true;
+        }
+    }
+
+    public function setAuto(bool $auto)
+    {
+        
+        if(!in_array('ROLE_SUPER_ADMIN', $this->getRoles()) && 
+            !in_array('ROLE_ADMIN', $this->getRoles())) {
+
+            if($auto){
+                $this->setRoles(['ROLE_AUTO']);
+            } else {
+                $this->setRoles([]);            
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,47 @@
+{% extends 'base9.html.twig' %}
+
+{% block body_id 'user_new' %}
+
+{% block main %}
+
+{# dump(user) #}
+
+    <h3>{{ 'Nuevo Usuario' }}</h3>
+
+    <br/>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8">
+                    <button type="submit" class="btn  btn-lg btn-primary">
+                        <i class="fa fa-save" aria-hidden="true"></i> {{ 'Guardar' }}
+                    </button>
+                </div>
+            </div>
+
+    {{ form_end(form) }}
+
+    <br>
+
+{% endblock %}
+
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('usuarios') }}" class="btn btn-lg btn-block btn btn-success">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'Lista de usuarios' }}
+        </a>
+        <br><br>
+
+    </div>
+
+    
+
+    {{ parent() }}
+    {# show_source_code(_self) #}
+
+{% endblock %}

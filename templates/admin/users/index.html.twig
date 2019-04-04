@@ -1,0 +1,144 @@
+{% extends 'base9.html.twig' %}
+
+{% block body_id 'usuarios' %}
+
+{% block main %}
+
+    <div class="container">
+
+        <div class="row justify-content-between">
+            <div class="column">
+                <h3>{{ 'Usuarios' }}</h3>
+            </div>        
+            <div class="column">
+
+                <a href="{{ path('usuario_nuevo') }}" class="btn btn-primary btn-lg">
+                    <i class="fa fa-edit" aria-hidden="true"></i> {{ 'Nuevo' }}
+                </a>
+            </div>        
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <table class="table table-hover table-responsive table-sm">
+
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>{{ 'Nombre' }}</th>
+                        <th>{{ 'Apellidos' }}</th>
+                        <th>Tel</th>
+                        <th class="text-center">Activo</th>
+                        <th>PIN <i class="fa fa-lock text-secondary"></i></th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+        
+                    {% for usuario in usuarios %}
+                    <tr>
+        
+                        {% if 'ROLE_SUPER_ADMIN' in user.roles or
+                            'ROLE_SUPER_ADMIN' not in usuario.roles %}
+                            <td class="text-left">
+                                <div class="item-actions">
+                                <a href="{{ path('usuario_id_edit', {id: usuario.id}) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> {{ 'Editar' }}
+                                </a>
+                                </div>
+                            </td>
+                        {% else %}
+                            {# Si es un super usuario y ha accedido un administrador, no puede cambiarlo #}
+                            <td class="text-left">
+                                &nbsp;
+                            </td>
+                        {% endif %}
+        
+                        <td class="text-right">
+        
+                        {% if 'ROLE_SUPER_ADMIN' in usuario.roles %}
+                            <i class="fas fa-key text-warning"></i>
+                            <i class="fas fa-key text-info"></i>
+                            <i class="fas fa-key text-secondary"></i>
+                        {% endif %}
+        
+                        {% if 'ROLE_ADMIN' in usuario.roles %}
+                            <i class="fas fa-key text-info"></i>
+                            <i class="fas fa-key text-secondary"></i>
+                        {% endif %}
+        
+                        {% if 'ROLE_AUTO' in usuario.roles %}
+                            <i class="fas fa-key text-secondary"></i>
+                        {% endif %}
+        
+                        </td>
+                        <td class="text-warning">
+                            {{ usuario.nombre }} {{ usuario.apellidos }}
+                        </td>
+                        <td class="text-warning">
+                            {{ usuario.email }}
+                        </td>    
+                        <td class="text-warning">
+                            {{ usuario.telefono }}
+                        </td>
+        
+                        <td class="text-center">
+                            {% if usuario.enabled %}
+                                <i class="fa fa-sun text-success"></i>
+                            {% else %}  
+                                <i class="fa fa-cloud text-danger"></i>
+                            {% endif %}  
+                        </td>
+        
+                        <td class="text-center">
+                        </td>
+        
+        
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+        
+            </table>
+        
+        </div>
+
+    </div>
+
+
+
+
+    
+{% endblock %}
+
+
+{% block sidebar %}
+
+<div class="card">
+    <div class="card-body">
+
+        <h5 class="card-title text-secondary">Usuarios y privilegios</h5>
+        <h6 class="card-text text-secondary">
+            <i class="fas fa-key text-warning"></i> PROPIETARIO<br>Puede crear y revocar administradores.
+        </h6>
+        <br>
+        <h6 class="card-text text-secondary">
+            <i class="fas fa-key text-info"></i> ADMINISTRADOR<br>Tiene acceso a la gestión de usuarios.
+        </h6>
+        <br>
+        <h6 class="card-text text-secondary">
+            <i class="fas fa-key text-secondary"></i> USUARIO AUTORIZADO <br>Puede crear y eliminar artículos, semielaborados, carpetas....
+        </h6>
+        <br>
+        <h6 class="card-text text-secondary">
+            OTROS USUARIOS <i class="fa fa-lock text-secondary"></i> <br>Solo disponen de un PIN de acceso para el registro de marcajes y acceso para consulta a la información de fabricación.
+        </h6>    
+    </div>
+</div>
+
+<br>
+   
+{% endblock %}
