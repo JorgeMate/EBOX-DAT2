@@ -18,10 +18,17 @@ use App\Entity\CodigoS;
 
 use App\Entity\User;
 
+use App\Entity\Cliente;
+
 use App\Form\NewUserType;
 use App\Form\UserType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+
 
 
 /**
@@ -135,9 +142,6 @@ class AdminController extends AbstractController
 
 
 
-
-
-
     /**
      * @Route("/codigoP/{id}", methods={"DELETE"}, name="codigoP_delete")
      */
@@ -163,18 +167,6 @@ class AdminController extends AbstractController
     }
 
 
-    /**
-     * @Route("/", name="admin")
-     */
-    public function admin()
-    {
-        $user = $this->getUser();
-
-        return $this->render('admin/admin.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
 
     /**
      * @Route("/cpanel", name="admin_cpanel")
@@ -188,6 +180,21 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/cliente/{id}", methods={"GET", "POST"}, name="cliente")
+     */
+    public function showCliente(Cliente $cliente): Response
+    {
+
+        $carpetas = $cliente->getCarpetas();
+
+        return $this->render('cliente/show.html.twig', [
+            'cliente' => $cliente,
+            'carpetas' => $carpetas,
+         // 'form' => $form->createView(),
+        ]);
+
+    }
 
 
 
@@ -202,6 +209,52 @@ class AdminController extends AbstractController
             'clientes' => $clientes,
         ]);
     }
+
+    /**
+    * @Route("/clientesX", name="clientesX")
+    */
+    public function clientes_paginados(EntityManagerInterface $entityManager, Request $request)
+    {
+
+        $order = 'name';
+
+        if ($request->query->get('orden')){
+            $order = $request->query->get('orden');
+        }
+
+
+        $queryBuilder = $entityManager->createQueryBuilder()
+        ->select('c')
+        ->from('App\Entity\Cliente', 'c')
+        ->orderBy('c.'.$order, 'ASC');
+        
+        $adapter = new DoctrineORMAdapter($queryBuilder);
+
+        $pagerfanta = new Pagerfanta($adapter);
+
+        $pagerfanta->setMaxPerPage(10); // 10 by default
+        $maxPerPage = $pagerfanta->getMaxPerPage();
+
+        $pagerfanta->getCurrentPageOffsetStart(6);
+        $pagerfanta->getCurrentPageOffsetEnd(6);
+
+        if (isset($_GET["page"])) {
+            //  $t = $pagerfanta->getNbPages();
+            //  var_dump($t); die;
+            $page = min($_GET["page"], $pagerfanta->getNbPages());
+            $pagerfanta->setCurrentPage($page);
+        }
+
+        return $this->render('cliente/indexX.html.twig', [
+            'my_pager' => $pagerfanta,
+            'order' => $order,
+        ]);
+    
+
+
+
+    }
+
 
 }
 

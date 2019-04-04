@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cliente|{{ cliente.id }}{% endblock %}
+
+{% block main %}
+
+<h3 class="text-info"> Cliente {{ cliente.id }} <i class="far fa-address-book"></i> | {{ cliente.name }}</h3>
+
+<br>
+<br>
+
+<div class="row">
+
+    <div class="col-6">
+
+        <table class="table table-borderless table-hover table-sm">
+
+            <tbody>
+
+                <tr>
+                    <td>ID Interno</td>
+                    <td>{{ cliente.id }}</td>
+                </tr>
+                <tr>
+                    <td>Cliente</td>
+                    <td>{{ cliente.name }}</td>
+                </tr>
+                <tr>
+                    <td></td><td></td>
+                </tr>
+                    <tr>
+                    <td>Cod. Conta</td>
+                    <td>{{ cliente.codConta }}</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="col-6">
+        <h5><i class="far fa-folder-open"></i> Carpetas de este Cliente</h5>
+        <hr>
+        <table>
+                {% for carpeta in carpetas %}
+            <tr>
+                <td>
+                   {{ carpeta.id }}  
+                </td>
+                <td>
+                    <i class="far fa-folder-open"></i>
+                </td>
+                <td>
+                    <a href="{{ path('carpeta', {id: carpeta.id}) }}">{{ carpeta.name }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+        <br>
+        
+    </div>
+
+    
+
+    
+
+</div>
+    
+
+{% endblock %}

@@ -27,8 +27,8 @@ class UserType extends AbstractType
     private $isAdmin;
     private $isSuper;
 
-    private $self_edit;
-//    private $autoInspect;
+    // private $self_edit;
+    // private $autoInspect;
 
 
     public function __construct(Security $security){
@@ -36,8 +36,8 @@ class UserType extends AbstractType
         $this->isAuto = false;        
         $this->isAdmin = false;        
         $this->isSuper = false;
- //       $this->autoInspect = false;
 
+        // $this->autoInspect = false;
         // $this->autoInspect = ($this->user->getId() == $user->getId());
         
         $userRequest = $security->getUser();  

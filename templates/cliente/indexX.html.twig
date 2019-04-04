@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+
+        <div class="row justify-content-between">
+            <div class="column">
+                <h3><i class="far fa-address-book"> </i>Clientes | Categorías</h3>
+            </div>        
+                <div class="column">
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">Ver Todos</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Solo Activos</label>
+                    </div>
+
+                </div>        
+        </div>
+
+    </div>
+
+        
+
+        <div class="pagerfanta">
+
+            <table class="table table-hover table-sm table-responsible">
+
+                <thead>
+                    
+                    <th class="text-center"><a href="{{ path('clientesX', {orden: 'id'}) }}">{% if order == 'id' %}<i class="fas fa-sort-down"></i>{% endif %} Cod. interno</a></th>
+                    <th><a href="{{ path('clientesX', {orden: 'name'}) }}">{% if order == 'name' %}<i class="fas fa-sort-down"></i>{% endif %} Cliente</a></th>
+                
+                    <th class="text-left">Cliente</th>
+                    <th class="text-center">Activo</th>
+                    <th></th>
+                    
+                </thead>
+                <tbody>
+                {% for item in my_pager.currentPageResults %}
+
+                <tr>
+                    
+                    <td class="text-center">{{ item.id }}</td>
+                    <td class="text-left">{{ item.name }}</td>
+                    
+                    
+                    <td class="text-center">
+
+                        {% if item.activo %}
+                            <i class="fas fa-sun text-warning"></i>
+                        {% else %}
+                            
+                        {% endif %}
+                        
+                        
+                    </td>  
+                    <td class="text-right"><a href="{{ path('cliente', {id: item.id}) }}" > <i class="fas fa-search"></i> Detalle</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+            {{ pagerfanta(my_pager, 'twitter_bootstrap4', { 'proximity': 1}) }}
+
+        </div>
+
+        
+
+    
+
+
+{% endblock %}

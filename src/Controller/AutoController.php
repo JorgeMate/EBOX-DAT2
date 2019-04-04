@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Semi;
 use App\Entity\Trabajo;
 
+use App\Entity\Formato;
+
 use App\Form\SemiType;
 use App\Form\TrabajoType;
 
@@ -27,6 +29,20 @@ use App\Form\TrabajoType;
 class AutoController extends AbstractController
 {
     
+    /**
+     * @Route("/", name="auto")
+     */
+    public function admin()
+    {
+        $user = $this->getUser();
+
+        return $this->render('admin/auto.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+
+
     /**
      * @Route("/semielaborado/nuevo", methods={"GET", "POST"}, name="new_semi")
      */
@@ -113,5 +129,23 @@ class AutoController extends AbstractController
 
         
     }
+
+    /**
+     * @Route("/formato/{id}", methods={"GET", "POST"}, name="formato")
+     */
+    public function showFormato(Formato $formato): Response
+    {
+
+        $carpetas = $formato->getCarpetas();
+
+        return $this->render('formato/show.html.twig', [
+            'formato' => $formato,
+            'carpetas' => $carpetas,
+         // 'form' => $form->createView(),
+        ]);
+
+    }
+    
+
 
 }

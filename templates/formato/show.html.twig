@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formato|{{ formato.id }}{% endblock %}
+
+{% block main %}
+
+<h3 class="text-warning"> Formato {{ formato.id }} <i class="fas fa-ruler-combined"></i> | {{ formato.name }}</h3>
+
+<br>
+<br>
+
+<div class="row">
+
+    <div class="col-6">
+
+        <table class="table table-borderless table-hover table-sm">
+
+            <tbody>
+
+                <tr>
+                    <td>ID Interno</td>
+                    <td>{{ formato.id }}</td>
+                </tr>
+                <tr>
+                    <td>Formato</td>
+                    <td>{{ formato.name }}</td>
+                </tr>
+                <tr>
+                    <td></td><td></td>
+                </tr>
+                    <tr>
+                    <td>Notas</td>
+                    <td>{{ formato.notas }}</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="col-6">
+        <h5><i class="far fa-folder-open"></i> Carpetas con este formato</h5>
+        <hr>
+        <table>
+                {% for carpeta in carpetas %}
+            <tr>
+                <td>
+                   {{ carpeta.id }}  
+                </td>
+                <td>
+                    <i class="far fa-folder-open"></i>
+                </td>
+                <td>
+                    <a href="{{ path('carpeta', {id: carpeta.id}) }}">{{ carpeta.name }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+        <br>
+        
+    </div>
+
+    
+
+    
+
+</div>
+    
+
+{% endblock %}

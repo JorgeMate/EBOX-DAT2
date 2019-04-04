@@ -24,9 +24,9 @@ class CarpetaController extends AbstractController
 {
 
     /**
-     * @Route("/carpeta/{id}", name="carpeta_show")
+     * @Route("/carpeta/{id}", name="carpeta")
      */
-    public function carpeta_show(Carpeta $carpeta)
+    public function showCarpeta(Carpeta $carpeta)
     {
 
         $trabajos = $carpeta->getTrabajos();
