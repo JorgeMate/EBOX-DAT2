@@ -113,3 +113,18 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdaGaAUAAAAAKTJB_RqebG2myyYhwUBjSffCM4Q"></script>
+  <script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute('6LdaGaAUAAAAAKTJB_RqebG2myyYhwUBjSffCM4Q', {action: 'homepage'}).then(function(token) {
+         ...
+      });
+  });
+  </script>
+
+  {% endblock %}
